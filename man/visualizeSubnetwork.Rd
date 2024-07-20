@@ -19,8 +19,8 @@ visualizeSubnetwork(nodes, edges, pvalue_cutoff = 0.05, logfc_cutoff = 0.5)
 Create visualization of subnetwork in cytoscape
 }
 \examples{
-input = data.table::fread(system.file("tinytest/processed_data/groupComparisonModel.csv", 
-                             package = "MSstats"))
+input = data.table::fread(system.file("processed_data/groupComparisonModel.csv", 
+                             package = "MSstatsPPI"))
 # subnetwork = getSubnetworkFromIndra(input)
 # visualizeSubnetwork(subnetwork$nodes, subnetwork$edges)
 
