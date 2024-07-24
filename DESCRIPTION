@@ -31,7 +31,7 @@ VignetteBuilder: knitr
 biocViews: ImmunoOncology, MassSpectrometry, Proteomics, Software, 
     QualityControl
 Encoding: UTF-8
-URL: http://msstats.org
+URL: http://msstats.org, https://vitek-lab.github.io/MSstatsPPI/
 BugReports: https://groups.google.com/forum/#!forum/msstats
 Config/testthat/edition: 3
 RoxygenNote: 7.3.2
