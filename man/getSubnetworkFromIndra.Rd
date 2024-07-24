@@ -7,10 +7,10 @@
 getSubnetworkFromIndra(input, pvalue_cutoff = NULL)
 }
 \arguments{
-\item{input}{groupComparison comparisionResult table with additional HGNC ID 
+\item{input}{groupComparison comparisionResult table with additional HGNC ID
 and HGNC name columns}
 
-\item{pvalue_cutoff}{p-value cutoff for filtering. Default is NULL, i.e. no 
+\item{pvalue_cutoff}{p-value cutoff for filtering. Default is NULL, i.e. no
 filtering}
 }
 \value{
@@ -20,11 +20,12 @@ list of 2 data.frames, nodes and edges
 Get subnetwork from INDRA database with differential analysis results
 }
 \examples{
-input = data.table::fread(system.file("processed_data/groupComparisonModel.csv", 
-                             package = "MSstatsPPI"))
+input <- data.table::fread(system.file(
+    "processed_data/groupComparisonModel.csv",
+    package = "MSstatsPPI"
+))
 # subnetwork = getSubnetworkFromIndra(input, pvalue_cutoff = 0.05)
 # head(subnetwork$nodes)
 # head(subnetwork$edges)
 
-  
 }
