@@ -1,0 +1,38 @@
+---
+title: "MSstatsPPI"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{MSstatsPPI: Introduction}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(MSstatsPPI)
+```
+
+# Purpose of MSstatsPPI
+  
+The `MSstatsPPI` package is a member of the `MSstats` family of packages.
+It contains a set of functions for interpretation of mass spectrometry (MS) 
+statistical analysis results in the context of protein-protein interaction (PPI) 
+networks. The package is designed to be used in conjunction with the `MSstats`.
+
+The package provides a function `getSubnetworkFromIndra` that retrieves a
+subnetwork of PPIs from the INDRA database based on differential abundance
+analysis results.  The function `visualizeSubnetwork` then takes the output
+of `getSubnetworkFromIndra` and visualizes the subnetwork.
+
+```{r proteinNetworkDiscovery, eval=FALSE}
+    input = data.table::fread(system.file("processed_data/groupComparisonModel.csv", 
+                           package = "MSstatsPPI"))
+    subnetwork = getSubnetworkFromIndra(input)
+    visualizeSubnetwork(subnetwork$nodes, subnetwork$edges)
+```

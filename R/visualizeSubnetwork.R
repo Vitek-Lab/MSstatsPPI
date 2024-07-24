@@ -9,10 +9,12 @@
 #' @export
 #' 
 #' @examples 
-#' input = data.table::fread(system.file("processed_data/groupComparisonModel.csv", 
-#'                              package = "MSstatsPPI"))
+#' input = data.table::fread(system.file(
+#'     "processed_data/groupComparisonModel.csv", package = "MSstatsPPI"))
 #' # subnetwork = getSubnetworkFromIndra(input)
 #' # visualizeSubnetwork(subnetwork$nodes, subnetwork$edges)
+#' 
+#' @return cytoscape visualization of subnetwork
 #'
 #'               
 visualizeSubnetwork = function(nodes, edges, 

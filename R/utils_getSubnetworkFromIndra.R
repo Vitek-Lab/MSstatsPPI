@@ -6,7 +6,8 @@
 #' @keywords internal
 #' @noRd
 .callIndraCogexApi = function(hgnc_ids) {
-    INDRA_COGEX_URL = "https://discovery.indra.bio/api/indra_subnetwork_relations"
+    INDRA_COGEX_URL = 
+        "https://discovery.indra.bio/api/indra_subnetwork_relations"
     
     groundings = lapply(hgnc_ids, function(x) list("HGNC", x))
     groundings = list(nodes = groundings)
@@ -88,11 +89,11 @@
 #' @noRd
 .constructEdgesDataFrame = function(res, input) {
     res = .collapseDuplicateEdgesIntoEdgeToMetadataMapping(res, input)
-    edges = data.frame(source=sapply(keys(res), function(x) query(res, x)$source_uniprot_id),
-                       target=sapply(keys(res), function(x) query(res, x)$target_uniprot_id),
-                       interaction=sapply(keys(res), function(x) query(res, x)$data$stmt_type), 
-                       evidenceCount=sapply(keys(res), function(x) query(res, x)$data$evidence_count),
-                       evidenceLink=sapply(keys(res), function(x) query(res, x)$evidence_list),
+    edges = data.frame(source=vapply(keys(res), function(x) query(res, x)$source_uniprot_id, ""),
+                       target=vapply(keys(res), function(x) query(res, x)$target_uniprot_id, ""),
+                       interaction=vapply(keys(res), function(x) query(res, x)$data$stmt_type, ""), 
+                       evidenceCount=vapply(keys(res), function(x) query(res, x)$data$evidence_count, 1),
+                       evidenceLink=vapply(keys(res), function(x) query(res, x)$evidence_list, ""),
                        stringsAsFactors=FALSE)
     return(edges)
 }

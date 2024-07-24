@@ -15,6 +15,9 @@ visualizeSubnetwork(nodes, edges, pvalue_cutoff = 0.05, logfc_cutoff = 0.5)
 
 \item{logfc_cutoff}{log fold change cutoff for coloring significant proteins. Default is 0.5}
 }
+\value{
+cytoscape visualization of subnetwork
+}
 \description{
 Create visualization of subnetwork in cytoscape
 }
@@ -24,5 +27,4 @@ input = data.table::fread(system.file("processed_data/groupComparisonModel.csv",
 # subnetwork = getSubnetworkFromIndra(input)
 # visualizeSubnetwork(subnetwork$nodes, subnetwork$edges)
 
-              
 }
