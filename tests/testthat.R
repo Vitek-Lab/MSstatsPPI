@@ -7,6 +7,6 @@
 # * https://testthat.r-lib.org/articles/special-files.html
 
 library(testthat)
-library(MSstatsPPI)
+library(MSstatsBioNet)
 
-test_check("MSstatsPPI")
+test_check("MSstatsBioNet")

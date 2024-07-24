@@ -22,7 +22,7 @@ Get subnetwork from INDRA database with differential analysis results
 \examples{
 input <- data.table::fread(system.file(
     "processed_data/groupComparisonModel.csv",
-    package = "MSstatsPPI"
+    package = "MSstatsBioNet"
 ))
 # subnetwork = getSubnetworkFromIndra(input, pvalue_cutoff = 0.05)
 # head(subnetwork$nodes)
