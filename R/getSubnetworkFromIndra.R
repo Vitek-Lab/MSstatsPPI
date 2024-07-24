@@ -16,7 +16,6 @@
 #' # head(subnetwork$nodes)
 #' # head(subnetwork$edges)
 #'
-#'   
 getSubnetworkFromIndra = function(input, pvalue_cutoff = NULL) {
     input = .filterGetSubnetworkFromIndraInput(input, pvalue_cutoff)
     res = .callIndraCogexApi(input$HgncId)

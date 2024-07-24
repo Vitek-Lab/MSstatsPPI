@@ -66,7 +66,8 @@
     edge_to_metadata_mapping = hashmap()
 
     for (edge in res) {
-        key = paste(edge$source_id, edge$target_id, edge$data$stmt_type, sep="_")
+        key = paste(edge$source_id, edge$target_id, edge$data$stmt_type, 
+                    sep="_")
         if (key %in% keys(edge_to_metadata_mapping)) {
             edge_to_metadata_mapping[[key]]$data$evidence_count = 
                 edge_to_metadata_mapping[[key]]$data$evidence_count + 
@@ -89,12 +90,18 @@
 #' @noRd
 .constructEdgesDataFrame = function(res, input) {
     res = .collapseDuplicateEdgesIntoEdgeToMetadataMapping(res, input)
-    edges = data.frame(source=vapply(keys(res), function(x) query(res, x)$source_uniprot_id, ""),
-                       target=vapply(keys(res), function(x) query(res, x)$target_uniprot_id, ""),
-                       interaction=vapply(keys(res), function(x) query(res, x)$data$stmt_type, ""), 
-                       evidenceCount=vapply(keys(res), function(x) query(res, x)$data$evidence_count, 1),
-                       evidenceLink=vapply(keys(res), function(x) query(res, x)$evidence_list, ""),
-                       stringsAsFactors=FALSE)
+    edges = data.frame(source=vapply(keys(res), function(x) 
+                            query(res, x)$source_uniprot_id, ""),
+                        target=vapply(keys(res), function(x) 
+                            query(res, x)$target_uniprot_id, ""),
+                        interaction=vapply(keys(res), function(x) 
+                            query(res, x)$data$stmt_type, ""), 
+                        evidenceCount=vapply(keys(res), function(x) 
+                            query(res, x)$data$evidence_count, 1),
+                        evidenceLink=vapply(keys(res), function(x) 
+                            query(res, x)$evidence_list, ""),
+                        stringsAsFactors=FALSE
+                    )
     return(edges)
 }
 
@@ -104,9 +111,11 @@
 #' @keywords internal
 #' @noRd
 .constructNodesDataFrame = function(input) {
-    nodes = data.frame(id=input$Protein,
-                       logFC=input$log2FC, 
-                       pvalue=input$adj.pvalue,
-                       stringsAsFactors=FALSE)
+    nodes = data.frame(
+                        id=input$Protein,
+                        logFC=input$log2FC, 
+                        pvalue=input$adj.pvalue,
+                        stringsAsFactors=FALSE
+                    )
     return(nodes)
 }

@@ -3,7 +3,7 @@ Type: Package
 Title: Protein-Protein Interaction Analysis for MS-based Proteomics Experiments
 Version: 0.1.0
 Authors@R: c(
-    person("Anthony", "Wu", email = "anthonywu92@gmail.com", 
+    person("Anthony", "Wu", email = "wu.anthon@northeastern.edu", 
         role = c("aut", "cre")),
     person("Olga", "Vitek", email = "o.vitek@northeastern.edu", 
         role = "aut", comment=c(ORCID = "0000-0003-1728-1104"))) 
@@ -28,7 +28,8 @@ Suggests:
     rmarkdown,
     testthat (>= 3.0.0)
 VignetteBuilder: knitr
-biocViews: ImmunoOncology, MassSpectrometry, Proteomics, Software, QualityControl
+biocViews: ImmunoOncology, MassSpectrometry, Proteomics, Software, 
+    QualityControl
 Encoding: UTF-8
 URL: http://msstats.org
 BugReports: https://groups.google.com/forum/#!forum/msstats
