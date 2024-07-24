@@ -9,8 +9,8 @@ vignette: >
 
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
-  collapse = TRUE,
-  comment = "#>"
+    collapse = TRUE,
+    comment = "#>"
 )
 ```
 
@@ -32,9 +32,11 @@ analysis results.  The function `visualizeSubnetwork` then takes the output
 of `getSubnetworkFromIndra` and visualizes the subnetwork.
 
 ```{r proteinNetworkDiscovery, eval=FALSE}
-    input = data.table::fread(
-        system.file("processed_data/groupComparisonModel.csv", 
-            package = "MSstatsPPI"))
-    subnetwork = getSubnetworkFromIndra(input)
-    visualizeSubnetwork(subnetwork$nodes, subnetwork$edges)
+input <- data.table::fread(
+    system.file("processed_data/groupComparisonModel.csv",
+        package = "MSstatsPPI"
+    )
+)
+subnetwork <- getSubnetworkFromIndra(input)
+visualizeSubnetwork(subnetwork$nodes, subnetwork$edges)
 ```
