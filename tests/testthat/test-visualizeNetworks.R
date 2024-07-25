@@ -1,30 +1,30 @@
-test_that("visualizeSubnetwork works correctly", {
+test_that("visualizeNetworks works correctly", {
     input <- readRDS(system.file("processed_data/subnetwork.rds",
         package = "MSstatsBioNet"
     ))
 
     mock_createNetworkFromDataFrames <- mock()
     stub(
-        visualizeSubnetwork, "createNetworkFromDataFrames",
+        visualizeNetworks, "createNetworkFromDataFrames",
         mock_createNetworkFromDataFrames
     )
     mock_mapVisualProperty <- mock()
     stub(
-        visualizeSubnetwork, "mapVisualProperty",
+        visualizeNetworks, "mapVisualProperty",
         mock_mapVisualProperty
     )
     mock_createVisualStyle <- mock()
     stub(
-        visualizeSubnetwork, "createVisualStyle",
+        visualizeNetworks, "createVisualStyle",
         mock_createVisualStyle
     )
     mock_setVisualStyle <- mock()
     stub(
-        visualizeSubnetwork, "setVisualStyle",
+        visualizeNetworks, "setVisualStyle",
         mock_setVisualStyle
     )
 
-    expect_silent(visualizeSubnetwork(input$nodes, input$edges))
+    expect_silent(visualizeNetworks(input$nodes, input$edges))
     expect_called(mock_createNetworkFromDataFrames, 1)
     expect_called(mock_mapVisualProperty, 2)
     expect_called(mock_createVisualStyle, 1)
@@ -32,33 +32,33 @@ test_that("visualizeSubnetwork works correctly", {
 })
 
 
-test_that("visualizeSubnetwork with p-value and logFC constraints works", {
+test_that("visualizeNetworks with p-value and logFC constraints works", {
     input <- readRDS(system.file("processed_data/subnetwork.rds",
         package = "MSstatsBioNet"
     ))
 
     mock_createNetworkFromDataFrames <- mock()
     stub(
-        visualizeSubnetwork, "createNetworkFromDataFrames",
+        visualizeNetworks, "createNetworkFromDataFrames",
         mock_createNetworkFromDataFrames
     )
     mock_mapVisualProperty <- mock()
     stub(
-        visualizeSubnetwork, "mapVisualProperty",
+        visualizeNetworks, "mapVisualProperty",
         mock_mapVisualProperty
     )
     mock_createVisualStyle <- mock()
     stub(
-        visualizeSubnetwork, "createVisualStyle",
+        visualizeNetworks, "createVisualStyle",
         mock_createVisualStyle
     )
     mock_setVisualStyle <- mock()
     stub(
-        visualizeSubnetwork, "setVisualStyle",
+        visualizeNetworks, "setVisualStyle",
         mock_setVisualStyle
     )
 
-    expect_silent(visualizeSubnetwork(input$nodes, input$edges,
+    expect_silent(visualizeNetworks(input$nodes, input$edges,
         pvalue_cutoff = 0.01, logfc_cutoff = 2.5
     ))
     expect_called(mock_createNetworkFromDataFrames, 1)

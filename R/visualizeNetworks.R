@@ -17,13 +17,13 @@
 #'     package = "MSstatsBioNet"
 #' ))
 #' # subnetwork = getSubnetworkFromIndra(input)
-#' # visualizeSubnetwork(subnetwork$nodes, subnetwork$edges)
+#' # visualizeNetworks(subnetwork$nodes, subnetwork$edges)
 #'
 #' @return cytoscape visualization of subnetwork
 #'
 #'
-visualizeSubnetwork <- function(nodes, edges,
-                                pvalue_cutoff = 0.05, logfc_cutoff = 0.5) {
+visualizeNetworks <- function(nodes, edges,
+                              pvalue_cutoff = 0.05, logfc_cutoff = 0.5) {
     # Add additional columns for visualization
     nodes$logFC_color <- nodes$logFC
     nodes$logFC_color[nodes$pvalue > pvalue_cutoff |

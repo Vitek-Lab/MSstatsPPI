@@ -28,7 +28,7 @@ networks. The package is designed to be used in conjunction with the
 
 The package provides a function `getSubnetworkFromIndra` that retrieves a
 subnetwork of proteins from the INDRA database based on differential abundance
-analysis results.  The function `visualizeSubnetwork` then takes the output
+analysis results.  The function `visualizeNetworks` then takes the output
 of `getSubnetworkFromIndra` and visualizes the subnetwork.
 
 ```{r proteinNetworkDiscovery, eval=FALSE}
@@ -38,5 +38,5 @@ input <- data.table::fread(
     )
 )
 subnetwork <- getSubnetworkFromIndra(input)
-visualizeSubnetwork(subnetwork$nodes, subnetwork$edges)
+visualizeNetworks(subnetwork$nodes, subnetwork$edges)
 ```
