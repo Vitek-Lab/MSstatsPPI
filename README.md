@@ -1,6 +1,7 @@
-# MSstatsPPI
+# MSstatsBioNet
 
-This package provides a suite of functions to query various PPI databases, filter queries & results, and visualize PPIs.
+This package provides a suite of functions to query various network databases, 
+filter queries & results, and visualize networks.
 
 ## Databases Supported
 

@@ -14,7 +14,7 @@
 #' @examples
 #' input <- data.table::fread(system.file(
 #'     "processed_data/groupComparisonModel.csv",
-#'     package = "MSstatsPPI"
+#'     package = "MSstatsBioNet"
 #' ))
 #' # subnetwork = getSubnetworkFromIndra(input)
 #' # visualizeSubnetwork(subnetwork$nodes, subnetwork$edges)
