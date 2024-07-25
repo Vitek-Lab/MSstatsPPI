@@ -2,8 +2,8 @@ pandoc: 3.1.11
 pkgdown: 2.1.0
 pkgdown_sha: ~
 articles:
-  MSstatsPPI: MSstatsPPI.html
-last_built: 2024-07-24T16:38Z
+  MSstatsBioNet: MSstatsBioNet.html
+last_built: 2024-07-25T15:24Z
 urls:
-  reference: https://vitek-lab.github.io/MSstatsPPI/reference
-  article: https://vitek-lab.github.io/MSstatsPPI/articles
+  reference: https://vitek-lab.github.io/MSstatsBioNet/reference
+  article: https://vitek-lab.github.io/MSstatsBioNet/articles
