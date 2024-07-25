@@ -1,5 +1,7 @@
 # MSstatsBioNet
 
+[![Codecov test coverage](https://codecov.io/github/Vitek-Lab/MSstatsBioNet/graph/badge.svg?token=SCPSPMTOEF)](https://codecov.io/github/Vitek-Lab/MSstatsBioNet)
+
 This package provides a suite of functions to query various network databases, 
 filter queries & results, and visualize networks.
 
