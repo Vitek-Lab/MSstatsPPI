@@ -73,7 +73,7 @@ package is designed to be used in conjunction with the
 <p>The package provides a function <code>getSubnetworkFromIndra</code>
 that retrieves a subnetwork of proteins from the INDRA database based on
 differential abundance analysis results. The function
-<code>visualizeSubnetwork</code> then takes the output of
+<code>visualizeNetworks</code> then takes the output of
 <code>getSubnetworkFromIndra</code> and visualizes the subnetwork.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">input</span> <span class="op">&lt;-</span> <span class="fu">data.table</span><span class="fu">::</span><span class="fu"><a href="https://rdatatable.gitlab.io/data.table/reference/fread.html" class="external-link">fread</a></span><span class="op">(</span></span>
@@ -82,7 +82,7 @@ differential abundance analysis results. The function
 <span>    <span class="op">)</span></span>
 <span><span class="op">)</span></span>
 <span><span class="va">subnetwork</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/getSubnetworkFromIndra.html">getSubnetworkFromIndra</a></span><span class="op">(</span><span class="va">input</span><span class="op">)</span></span>
-<span><span class="fu"><a href="../reference/visualizeSubnetwork.html">visualizeSubnetwork</a></span><span class="op">(</span><span class="va">subnetwork</span><span class="op">$</span><span class="va">nodes</span>, <span class="va">subnetwork</span><span class="op">$</span><span class="va">edges</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu"><a href="../reference/visualizeNetworks.html">visualizeNetworks</a></span><span class="op">(</span><span class="va">subnetwork</span><span class="op">$</span><span class="va">nodes</span>, <span class="va">subnetwork</span><span class="op">$</span><span class="va">edges</span><span class="op">)</span></span></code></pre></div>
 </div>
   </main>
 </div>
