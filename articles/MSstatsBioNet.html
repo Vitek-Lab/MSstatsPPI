@@ -20,7 +20,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">MSstatsBioNet</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.99.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -84,7 +84,57 @@ differential abundance analysis results. The function
 <span><span class="va">subnetwork</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/getSubnetworkFromIndra.html">getSubnetworkFromIndra</a></span><span class="op">(</span><span class="va">input</span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/visualizeNetworks.html">visualizeNetworks</a></span><span class="op">(</span><span class="va">subnetwork</span><span class="op">$</span><span class="va">nodes</span>, <span class="va">subnetwork</span><span class="op">$</span><span class="va">edges</span><span class="op">)</span></span></code></pre></div>
 </div>
-  </main>
+<div class="section level2">
+<h2 id="session-info">Session info<a class="anchor" aria-label="anchor" href="#session-info"></a>
+</h2>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/sessionInfo.html" class="external-link">sessionInfo</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="co">#&gt; R version 4.4.1 (2024-06-14)</span></span>
+<span><span class="co">#&gt; Platform: x86_64-pc-linux-gnu</span></span>
+<span><span class="co">#&gt; Running under: Ubuntu 22.04.4 LTS</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Matrix products: default</span></span>
+<span><span class="co">#&gt; BLAS:   /usr/lib/x86_64-linux-gnu/openblas-pthread/libblas.so.3 </span></span>
+<span><span class="co">#&gt; LAPACK: /usr/lib/x86_64-linux-gnu/openblas-pthread/libopenblasp-r0.3.20.so;  LAPACK version 3.10.0</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; locale:</span></span>
+<span><span class="co">#&gt;  [1] LC_CTYPE=C.UTF-8       LC_NUMERIC=C           LC_TIME=C.UTF-8       </span></span>
+<span><span class="co">#&gt;  [4] LC_COLLATE=C.UTF-8     LC_MONETARY=C.UTF-8    LC_MESSAGES=C.UTF-8   </span></span>
+<span><span class="co">#&gt;  [7] LC_PAPER=C.UTF-8       LC_NAME=C              LC_ADDRESS=C          </span></span>
+<span><span class="co">#&gt; [10] LC_TELEPHONE=C         LC_MEASUREMENT=C.UTF-8 LC_IDENTIFICATION=C   </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; time zone: UTC</span></span>
+<span><span class="co">#&gt; tzcode source: system (glibc)</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; attached base packages:</span></span>
+<span><span class="co">#&gt; [1] stats     graphics  grDevices utils     datasets  methods   base     </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; other attached packages:</span></span>
+<span><span class="co">#&gt; [1] MSstatsBioNet_0.99.0</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; loaded via a namespace (and not attached):</span></span>
+<span><span class="co">#&gt;  [1] base64url_1.4       jsonlite_1.8.8      compiler_4.4.1     </span></span>
+<span><span class="co">#&gt;  [4] crayon_1.5.3        gtools_3.9.5        IRdisplay_1.1      </span></span>
+<span><span class="co">#&gt;  [7] bitops_1.0-7        RCy3_2.24.0         jquerylib_0.1.4    </span></span>
+<span><span class="co">#&gt; [10] systemfonts_1.1.0   textshaping_0.4.0   uuid_1.2-0         </span></span>
+<span><span class="co">#&gt; [13] yaml_2.3.9          fastmap_1.2.0       IRkernel_1.3.2     </span></span>
+<span><span class="co">#&gt; [16] R6_2.5.1            knitr_1.48          backports_1.5.0    </span></span>
+<span><span class="co">#&gt; [19] BiocGenerics_0.50.0 graph_1.82.0        XML_3.99-0.17      </span></span>
+<span><span class="co">#&gt; [22] desc_1.4.3          bslib_0.7.0         pillar_1.9.0       </span></span>
+<span><span class="co">#&gt; [25] RColorBrewer_1.1-3  rlang_1.1.4         utf8_1.2.4         </span></span>
+<span><span class="co">#&gt; [28] cachem_1.1.0        stringi_1.8.4       repr_1.1.7         </span></span>
+<span><span class="co">#&gt; [31] xfun_0.46           caTools_1.18.2      fs_1.6.4           </span></span>
+<span><span class="co">#&gt; [34] sass_0.4.9          RJSONIO_1.3-1.9     cli_3.6.3          </span></span>
+<span><span class="co">#&gt; [37] pkgdown_2.1.0       digest_0.6.36       base64enc_0.1-3    </span></span>
+<span><span class="co">#&gt; [40] pbdZMQ_0.3-11       lifecycle_1.0.4     r2r_0.1.1          </span></span>
+<span><span class="co">#&gt; [43] vctrs_0.6.5         KernSmooth_2.23-24  evaluate_0.24.0    </span></span>
+<span><span class="co">#&gt; [46] glue_1.7.0          ragg_1.3.2          stats4_4.4.1       </span></span>
+<span><span class="co">#&gt; [49] RCurl_1.98-1.16     fansi_1.0.6         rmarkdown_2.27     </span></span>
+<span><span class="co">#&gt; [52] httr_1.4.7          gplots_3.1.3.1      tools_4.4.1        </span></span>
+<span><span class="co">#&gt; [55] htmltools_0.5.8.1</span></span></code></pre></div>
+</div>
+  </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
+    </nav></aside>
 </div>
 
 
