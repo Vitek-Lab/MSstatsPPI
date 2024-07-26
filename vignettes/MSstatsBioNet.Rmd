@@ -19,7 +19,7 @@ library(MSstatsBioNet)
 ```
 
 # Purpose of MSstatsBioNet
-  
+
 The `MSstatsBioNet` package is a member of the `MSstats` family of packages.
 It contains a set of functions for interpretation of mass spectrometry (MS) 
 statistical analysis results in the context of protein-protein interaction 
@@ -39,4 +39,11 @@ input <- data.table::fread(
 )
 subnetwork <- getSubnetworkFromIndra(input)
 visualizeNetworks(subnetwork$nodes, subnetwork$edges)
+```
+
+
+# Session info
+
+```{r}
+sessionInfo()
 ```
