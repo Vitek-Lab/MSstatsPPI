@@ -20,7 +20,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">MSstatsBioNet</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.99.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.99.2</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -84,24 +84,24 @@ package is designed to be used in conjunction with the
 <span><span class="va">annot</span> <span class="op">=</span> <span class="fu">data.table</span><span class="fu">::</span><span class="fu"><a href="https://rdatatable.gitlab.io/data.table/reference/fread.html" class="external-link">fread</a></span><span class="op">(</span><span class="va">annot</span><span class="op">)</span></span>
 <span><span class="va">msstats_imported</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/MSstatsConvert/man/MetamorpheusToMSstatsFormat.html" class="external-link">MetamorpheusToMSstatsFormat</a></span><span class="op">(</span><span class="va">input</span>, annotation <span class="op">=</span> <span class="va">annot</span>, </span>
 <span>                                               use_log_file <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
-<span><span class="co">#&gt; INFO  [2024-08-27 19:57:19] ** Raw data from Metamorpheus imported successfully.</span></span>
-<span><span class="co">#&gt; INFO  [2024-08-27 19:57:19] ** Raw data from Metamorpheus cleaned successfully.</span></span>
-<span><span class="co">#&gt; INFO  [2024-08-27 19:57:19] ** Using provided annotation.</span></span>
-<span><span class="co">#&gt; INFO  [2024-08-27 19:57:19] ** Run labels were standardized to remove symbols such as '.' or '%'.</span></span>
-<span><span class="co">#&gt; INFO  [2024-08-27 19:57:19] ** The following options are used:</span></span>
+<span><span class="co">#&gt; INFO  [2024-08-27 19:59:09] ** Raw data from Metamorpheus imported successfully.</span></span>
+<span><span class="co">#&gt; INFO  [2024-08-27 19:59:09] ** Raw data from Metamorpheus cleaned successfully.</span></span>
+<span><span class="co">#&gt; INFO  [2024-08-27 19:59:09] ** Using provided annotation.</span></span>
+<span><span class="co">#&gt; INFO  [2024-08-27 19:59:09] ** Run labels were standardized to remove symbols such as '.' or '%'.</span></span>
+<span><span class="co">#&gt; INFO  [2024-08-27 19:59:09] ** The following options are used:</span></span>
 <span><span class="co">#&gt;   - Features will be defined by the columns: PeptideSequence, PrecursorCharge</span></span>
 <span><span class="co">#&gt;   - Shared peptides will be removed.</span></span>
 <span><span class="co">#&gt;   - Proteins with single feature will not be removed.</span></span>
 <span><span class="co">#&gt;   - Features with less than 3 measurements across runs will be removed.</span></span>
-<span><span class="co">#&gt; INFO  [2024-08-27 19:57:19] ** Features with all missing measurements across runs are removed.</span></span>
-<span><span class="co">#&gt; INFO  [2024-08-27 19:57:19] ** Shared peptides are removed.</span></span>
-<span><span class="co">#&gt; INFO  [2024-08-27 19:57:19] ** Multiple measurements in a feature and a run are summarized by summaryforMultipleRows: max</span></span>
-<span><span class="co">#&gt; INFO  [2024-08-27 19:57:19] ** Features with one or two measurements across runs are removed.</span></span>
-<span><span class="co">#&gt; INFO  [2024-08-27 19:57:19] ** Run annotation merged with quantification data.</span></span>
-<span><span class="co">#&gt; INFO  [2024-08-27 19:57:19] ** Features with one or two measurements across runs are removed.</span></span>
-<span><span class="co">#&gt; INFO  [2024-08-27 19:57:19] ** Fractionation handled.</span></span>
-<span><span class="co">#&gt; INFO  [2024-08-27 19:57:19] ** Updated quantification data to make balanced design. Missing values are marked by NA</span></span>
-<span><span class="co">#&gt; INFO  [2024-08-27 19:57:19] ** Finished preprocessing. The dataset is ready to be processed by the dataProcess function.</span></span>
+<span><span class="co">#&gt; INFO  [2024-08-27 19:59:09] ** Features with all missing measurements across runs are removed.</span></span>
+<span><span class="co">#&gt; INFO  [2024-08-27 19:59:09] ** Shared peptides are removed.</span></span>
+<span><span class="co">#&gt; INFO  [2024-08-27 19:59:09] ** Multiple measurements in a feature and a run are summarized by summaryforMultipleRows: max</span></span>
+<span><span class="co">#&gt; INFO  [2024-08-27 19:59:09] ** Features with one or two measurements across runs are removed.</span></span>
+<span><span class="co">#&gt; INFO  [2024-08-27 19:59:09] ** Run annotation merged with quantification data.</span></span>
+<span><span class="co">#&gt; INFO  [2024-08-27 19:59:09] ** Features with one or two measurements across runs are removed.</span></span>
+<span><span class="co">#&gt; INFO  [2024-08-27 19:59:09] ** Fractionation handled.</span></span>
+<span><span class="co">#&gt; INFO  [2024-08-27 19:59:09] ** Updated quantification data to make balanced design. Missing values are marked by NA</span></span>
+<span><span class="co">#&gt; INFO  [2024-08-27 19:59:09] ** Finished preprocessing. The dataset is ready to be processed by the dataProcess function.</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">msstats_imported</span><span class="op">)</span></span>
 <span><span class="co">#&gt;   ProteinName                                           PeptideSequence</span></span>
 <span><span class="co">#&gt; 1      O43707 AC[Common Fixed:Carbamidomethyl on C]LISLGYDVENDRQGEAEFNR</span></span>
@@ -143,29 +143,29 @@ package is designed to be used in conjunction with the
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt;     savePlot</span></span>
 <span><span class="va">QuantData</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/MSstats/man/dataProcess.html" class="external-link">dataProcess</a></span><span class="op">(</span><span class="va">msstats_imported</span>, use_log_file <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
-<span><span class="co">#&gt; INFO  [2024-08-27 19:57:20] ** Log2 intensities under cutoff = 16.018  were considered as censored missing values.</span></span>
-<span><span class="co">#&gt; INFO  [2024-08-27 19:57:20] ** Log2 intensities = NA were considered as censored missing values.</span></span>
-<span><span class="co">#&gt; INFO  [2024-08-27 19:57:20] ** Use all features that the dataset originally has.</span></span>
-<span><span class="co">#&gt; INFO  [2024-08-27 19:57:20] </span></span>
+<span><span class="co">#&gt; INFO  [2024-08-27 19:59:10] ** Log2 intensities under cutoff = 16.018  were considered as censored missing values.</span></span>
+<span><span class="co">#&gt; INFO  [2024-08-27 19:59:10] ** Log2 intensities = NA were considered as censored missing values.</span></span>
+<span><span class="co">#&gt; INFO  [2024-08-27 19:59:10] ** Use all features that the dataset originally has.</span></span>
+<span><span class="co">#&gt; INFO  [2024-08-27 19:59:10] </span></span>
 <span><span class="co">#&gt;  # proteins: 7</span></span>
 <span><span class="co">#&gt;  # peptides per protein: 1-26</span></span>
 <span><span class="co">#&gt;  # features per peptide: 1-1</span></span>
-<span><span class="co">#&gt; INFO  [2024-08-27 19:57:20] Some proteins have only one feature: </span></span>
+<span><span class="co">#&gt; INFO  [2024-08-27 19:59:10] Some proteins have only one feature: </span></span>
 <span><span class="co">#&gt;  O00391 ...</span></span>
-<span><span class="co">#&gt; INFO  [2024-08-27 19:57:20] </span></span>
+<span><span class="co">#&gt; INFO  [2024-08-27 19:59:10] </span></span>
 <span><span class="co">#&gt;                     neg pos</span></span>
 <span><span class="co">#&gt;              # runs   2   2</span></span>
 <span><span class="co">#&gt;     # bioreplicates   2   2</span></span>
 <span><span class="co">#&gt;  # tech. replicates   1   1</span></span>
-<span><span class="co">#&gt; INFO  [2024-08-27 19:57:20]  == Start the summarization per subplot...</span></span>
+<span><span class="co">#&gt; INFO  [2024-08-27 19:59:10]  == Start the summarization per subplot...</span></span>
 <span><span class="co">#&gt;   |                                                                              |                                                                      |   0%  |                                                                              |==========                                                            |  14%  |                                                                              |====================                                                  |  29%  |                                                                              |==============================                                        |  43%  |                                                                              |========================================                              |  57%  |                                                                              |==================================================                    |  71%  |                                                                              |============================================================          |  86%  |                                                                              |======================================================================| 100%</span></span>
-<span><span class="co">#&gt; INFO  [2024-08-27 19:57:20]  == Summarization is done.</span></span>
+<span><span class="co">#&gt; INFO  [2024-08-27 19:59:10]  == Summarization is done.</span></span>
 <span><span class="va">groupComparisonResult</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/MSstats/man/groupComparison.html" class="external-link">groupComparison</a></span><span class="op">(</span>contrast.matrix<span class="op">=</span><span class="st">"pairwise"</span>, </span>
 <span>                                        data<span class="op">=</span><span class="va">QuantData</span>, </span>
 <span>                                        use_log_file <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
-<span><span class="co">#&gt; INFO  [2024-08-27 19:57:20]  == Start to test and get inference in whole plot ...</span></span>
+<span><span class="co">#&gt; INFO  [2024-08-27 19:59:10]  == Start to test and get inference in whole plot ...</span></span>
 <span><span class="co">#&gt;   |                                                                              |                                                                      |   0%  |                                                                              |==========                                                            |  14%  |                                                                              |====================                                                  |  29%  |                                                                              |==============================                                        |  43%  |                                                                              |========================================                              |  57%  |                                                                              |==================================================                    |  71%  |                                                                              |============================================================          |  86%  |                                                                              |======================================================================| 100%</span></span>
-<span><span class="co">#&gt; INFO  [2024-08-27 19:57:20]  == Comparisons for all proteins are done.</span></span></code></pre></div>
+<span><span class="co">#&gt; INFO  [2024-08-27 19:59:10]  == Comparisons for all proteins are done.</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="msstatsbionet-analysis">MSstatsBioNet Analysis<a class="anchor" aria-label="anchor" href="#msstatsbionet-analysis"></a>
@@ -249,7 +249,7 @@ associated licenses.</p>
 <span><span class="co">#&gt; [1] stats     graphics  grDevices utils     datasets  methods   base     </span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; other attached packages:</span></span>
-<span><span class="co">#&gt; [1] MSstats_4.12.1        MSstatsConvert_1.14.0 MSstatsBioNet_0.99.1 </span></span>
+<span><span class="co">#&gt; [1] MSstats_4.12.1        MSstatsConvert_1.14.0 MSstatsBioNet_0.99.2 </span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; loaded via a namespace (and not attached):</span></span>
 <span><span class="co">#&gt;  [1] tidyselect_1.2.1      viridisLite_0.4.2     IRdisplay_1.1        </span></span>
