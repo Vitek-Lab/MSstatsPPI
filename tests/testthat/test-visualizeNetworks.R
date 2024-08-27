@@ -1,5 +1,5 @@
 test_that("visualizeNetworks works correctly", {
-    input <- readRDS(system.file("processed_data/subnetwork.rds",
+    input <- readRDS(system.file("extdata/subnetwork.rds",
         package = "MSstatsBioNet"
     ))
 
@@ -33,7 +33,7 @@ test_that("visualizeNetworks works correctly", {
 
 
 test_that("visualizeNetworks with p-value and logFC constraints works", {
-    input <- readRDS(system.file("processed_data/subnetwork.rds",
+    input <- readRDS(system.file("extdata/subnetwork.rds",
         package = "MSstatsBioNet"
     ))
 

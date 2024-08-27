@@ -25,7 +25,7 @@ Create visualization of subnetwork in cytoscape
 }
 \examples{
 input <- data.table::fread(system.file(
-    "processed_data/groupComparisonModel.csv",
+    "extdata/groupComparisonModel.csv",
     package = "MSstatsBioNet"
 ))
 # subnetwork = getSubnetworkFromIndra(input)
