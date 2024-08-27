@@ -23,5 +23,12 @@ getSubnetworkFromIndra <- function(input, pvalue_cutoff = NULL) {
     res <- .callIndraCogexApi(input$HgncId)
     nodes <- .constructNodesDataFrame(input)
     edges <- .constructEdgesDataFrame(res, input)
+    warning(
+        "NOTICE: This function includes third-party software components 
+        that are licensed under the BSD 2-Clause License. Please ensure to 
+        include the third-party licensing agreements if redistributing this 
+        package or utilizing the results based on this package. 
+        See the LICENSE file for more details."
+    )
     return(list(nodes = nodes, edges = edges))
 }

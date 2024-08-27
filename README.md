@@ -21,6 +21,11 @@ You can install the development version of this package through Github:
 devtools::install_github("Vitek-Lab/MSstatsConvert", build_vignettes = TRUE)
 ```
 
+## License
+This package is distributed under the [Artistic-2.0](https://opensource.org/licenses/Artistic-2.0) license.  However, its dependencies may have different licenses.  
+
+Notably, INDRA is distributed under the [BSD 2-Clause](https://opensource.org/license/bsd-2-clause) license.  Furthermore, INDRA's knowledge sources may have different licenses for commercial applications.  Please refer to the [INDRA README](https://github.com/sorgerlab/indra?tab=readme-ov-file#indra-modules) for more information on its knowledge sources and their associated licenses.
+
 ## Databases Supported
 
 - INDRA

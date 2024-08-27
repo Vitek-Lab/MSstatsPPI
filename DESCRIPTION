@@ -14,7 +14,7 @@ Description: A set of tools for network analysis using mass
     context of prior knowledge from past literature. Notably, this package 
     integrates with INDRA, which is a database of biological networks
     extracted from the literature using text mining techniques.
-License: Artistic-2.0
+License: file LICENSE
 Depends: R (>= 4.4.0)
 Imports: 
     RCy3,
