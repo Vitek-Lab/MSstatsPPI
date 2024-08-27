@@ -70,19 +70,143 @@ for interpretation of mass spectrometry (MS) statistical analysis
 results in the context of protein-protein interaction networks. The
 package is designed to be used in conjunction with the
 <code>MSstats</code> package.</p>
+</div>
+<div class="section level2">
+<h2 id="msstats-convert-from-upstream-dataset">MSstats Convert from Upstream Dataset<a class="anchor" aria-label="anchor" href="#msstats-convert-from-upstream-dataset"></a>
+</h2>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">MSstatsConvert</span><span class="op">)</span></span>
+<span><span class="va">input</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"tinytest/raw_data/Metamorpheus/AllQuantifiedPeaks.tsv"</span>, </span>
+<span>                                package <span class="op">=</span> <span class="st">"MSstatsConvert"</span><span class="op">)</span></span>
+<span><span class="va">input</span> <span class="op">=</span> <span class="fu">data.table</span><span class="fu">::</span><span class="fu"><a href="https://rdatatable.gitlab.io/data.table/reference/fread.html" class="external-link">fread</a></span><span class="op">(</span><span class="va">input</span><span class="op">)</span></span>
+<span><span class="va">annot</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"tinytest/raw_data/Metamorpheus/Annotation.tsv"</span>, </span>
+<span>                                package <span class="op">=</span> <span class="st">"MSstatsConvert"</span><span class="op">)</span></span>
+<span><span class="va">annot</span> <span class="op">=</span> <span class="fu">data.table</span><span class="fu">::</span><span class="fu"><a href="https://rdatatable.gitlab.io/data.table/reference/fread.html" class="external-link">fread</a></span><span class="op">(</span><span class="va">annot</span><span class="op">)</span></span>
+<span><span class="va">msstats_imported</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/MSstatsConvert/man/MetamorpheusToMSstatsFormat.html" class="external-link">MetamorpheusToMSstatsFormat</a></span><span class="op">(</span><span class="va">input</span>, annotation <span class="op">=</span> <span class="va">annot</span>, </span>
+<span>                                               use_log_file <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span><span class="co">#&gt; INFO  [2024-08-27 19:57:19] ** Raw data from Metamorpheus imported successfully.</span></span>
+<span><span class="co">#&gt; INFO  [2024-08-27 19:57:19] ** Raw data from Metamorpheus cleaned successfully.</span></span>
+<span><span class="co">#&gt; INFO  [2024-08-27 19:57:19] ** Using provided annotation.</span></span>
+<span><span class="co">#&gt; INFO  [2024-08-27 19:57:19] ** Run labels were standardized to remove symbols such as '.' or '%'.</span></span>
+<span><span class="co">#&gt; INFO  [2024-08-27 19:57:19] ** The following options are used:</span></span>
+<span><span class="co">#&gt;   - Features will be defined by the columns: PeptideSequence, PrecursorCharge</span></span>
+<span><span class="co">#&gt;   - Shared peptides will be removed.</span></span>
+<span><span class="co">#&gt;   - Proteins with single feature will not be removed.</span></span>
+<span><span class="co">#&gt;   - Features with less than 3 measurements across runs will be removed.</span></span>
+<span><span class="co">#&gt; INFO  [2024-08-27 19:57:19] ** Features with all missing measurements across runs are removed.</span></span>
+<span><span class="co">#&gt; INFO  [2024-08-27 19:57:19] ** Shared peptides are removed.</span></span>
+<span><span class="co">#&gt; INFO  [2024-08-27 19:57:19] ** Multiple measurements in a feature and a run are summarized by summaryforMultipleRows: max</span></span>
+<span><span class="co">#&gt; INFO  [2024-08-27 19:57:19] ** Features with one or two measurements across runs are removed.</span></span>
+<span><span class="co">#&gt; INFO  [2024-08-27 19:57:19] ** Run annotation merged with quantification data.</span></span>
+<span><span class="co">#&gt; INFO  [2024-08-27 19:57:19] ** Features with one or two measurements across runs are removed.</span></span>
+<span><span class="co">#&gt; INFO  [2024-08-27 19:57:19] ** Fractionation handled.</span></span>
+<span><span class="co">#&gt; INFO  [2024-08-27 19:57:19] ** Updated quantification data to make balanced design. Missing values are marked by NA</span></span>
+<span><span class="co">#&gt; INFO  [2024-08-27 19:57:19] ** Finished preprocessing. The dataset is ready to be processed by the dataProcess function.</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">msstats_imported</span><span class="op">)</span></span>
+<span><span class="co">#&gt;   ProteinName                                           PeptideSequence</span></span>
+<span><span class="co">#&gt; 1      O43707 AC[Common Fixed:Carbamidomethyl on C]LISLGYDVENDRQGEAEFNR</span></span>
+<span><span class="co">#&gt; 2      O43707 AC[Common Fixed:Carbamidomethyl on C]LISLGYDVENDRQGEAEFNR</span></span>
+<span><span class="co">#&gt; 3      O43707 AC[Common Fixed:Carbamidomethyl on C]LISLGYDVENDRQGEAEFNR</span></span>
+<span><span class="co">#&gt; 4      O43707 AC[Common Fixed:Carbamidomethyl on C]LISLGYDVENDRQGEAEFNR</span></span>
+<span><span class="co">#&gt; 5      B9A064                                                AGVETTKPSK</span></span>
+<span><span class="co">#&gt; 6      B9A064                                                AGVETTKPSK</span></span>
+<span><span class="co">#&gt;   PrecursorCharge FragmentIon ProductCharge IsotopeLabelType Condition</span></span>
+<span><span class="co">#&gt; 1               3          NA            NA                L       neg</span></span>
+<span><span class="co">#&gt; 2               3          NA            NA                L       neg</span></span>
+<span><span class="co">#&gt; 3               3          NA            NA                L       pos</span></span>
+<span><span class="co">#&gt; 4               3          NA            NA                L       pos</span></span>
+<span><span class="co">#&gt; 5               2          NA            NA                L       neg</span></span>
+<span><span class="co">#&gt; 6               2          NA            NA                L       neg</span></span>
+<span><span class="co">#&gt;   BioReplicate        Run Fraction Intensity</span></span>
+<span><span class="co">#&gt; 1            1 NEG1-calib        1        NA</span></span>
+<span><span class="co">#&gt; 2            2 NEG2-calib        1  655481.2</span></span>
+<span><span class="co">#&gt; 3            3 POS1-calib        1  496891.9</span></span>
+<span><span class="co">#&gt; 4            4 POS2-calib        1  213691.0</span></span>
+<span><span class="co">#&gt; 5            1 NEG1-calib        1 4201663.3</span></span>
+<span><span class="co">#&gt; 6            2 NEG2-calib        1 4427577.4</span></span></code></pre></div>
+</div>
+<div class="section level2">
+<h2 id="msstats-process-and-groupcomparison">MSstats Process and GroupComparison<a class="anchor" aria-label="anchor" href="#msstats-process-and-groupcomparison"></a>
+</h2>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="http://msstats.org" class="external-link">MSstats</a></span><span class="op">)</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Attaching package: 'MSstats'</span></span>
+<span><span class="co">#&gt; The following objects are masked from 'package:MSstatsConvert':</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;     DIANNtoMSstatsFormat, DIAUmpiretoMSstatsFormat,</span></span>
+<span><span class="co">#&gt;     FragPipetoMSstatsFormat, MaxQtoMSstatsFormat,</span></span>
+<span><span class="co">#&gt;     OpenMStoMSstatsFormat, OpenSWATHtoMSstatsFormat, PDtoMSstatsFormat,</span></span>
+<span><span class="co">#&gt;     ProgenesistoMSstatsFormat, SkylinetoMSstatsFormat,</span></span>
+<span><span class="co">#&gt;     SpectronauttoMSstatsFormat</span></span>
+<span><span class="co">#&gt; The following object is masked from 'package:grDevices':</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;     savePlot</span></span>
+<span><span class="va">QuantData</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/MSstats/man/dataProcess.html" class="external-link">dataProcess</a></span><span class="op">(</span><span class="va">msstats_imported</span>, use_log_file <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span><span class="co">#&gt; INFO  [2024-08-27 19:57:20] ** Log2 intensities under cutoff = 16.018  were considered as censored missing values.</span></span>
+<span><span class="co">#&gt; INFO  [2024-08-27 19:57:20] ** Log2 intensities = NA were considered as censored missing values.</span></span>
+<span><span class="co">#&gt; INFO  [2024-08-27 19:57:20] ** Use all features that the dataset originally has.</span></span>
+<span><span class="co">#&gt; INFO  [2024-08-27 19:57:20] </span></span>
+<span><span class="co">#&gt;  # proteins: 7</span></span>
+<span><span class="co">#&gt;  # peptides per protein: 1-26</span></span>
+<span><span class="co">#&gt;  # features per peptide: 1-1</span></span>
+<span><span class="co">#&gt; INFO  [2024-08-27 19:57:20] Some proteins have only one feature: </span></span>
+<span><span class="co">#&gt;  O00391 ...</span></span>
+<span><span class="co">#&gt; INFO  [2024-08-27 19:57:20] </span></span>
+<span><span class="co">#&gt;                     neg pos</span></span>
+<span><span class="co">#&gt;              # runs   2   2</span></span>
+<span><span class="co">#&gt;     # bioreplicates   2   2</span></span>
+<span><span class="co">#&gt;  # tech. replicates   1   1</span></span>
+<span><span class="co">#&gt; INFO  [2024-08-27 19:57:20]  == Start the summarization per subplot...</span></span>
+<span><span class="co">#&gt;   |                                                                              |                                                                      |   0%  |                                                                              |==========                                                            |  14%  |                                                                              |====================                                                  |  29%  |                                                                              |==============================                                        |  43%  |                                                                              |========================================                              |  57%  |                                                                              |==================================================                    |  71%  |                                                                              |============================================================          |  86%  |                                                                              |======================================================================| 100%</span></span>
+<span><span class="co">#&gt; INFO  [2024-08-27 19:57:20]  == Summarization is done.</span></span>
+<span><span class="va">groupComparisonResult</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/MSstats/man/groupComparison.html" class="external-link">groupComparison</a></span><span class="op">(</span>contrast.matrix<span class="op">=</span><span class="st">"pairwise"</span>, </span>
+<span>                                        data<span class="op">=</span><span class="va">QuantData</span>, </span>
+<span>                                        use_log_file <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span><span class="co">#&gt; INFO  [2024-08-27 19:57:20]  == Start to test and get inference in whole plot ...</span></span>
+<span><span class="co">#&gt;   |                                                                              |                                                                      |   0%  |                                                                              |==========                                                            |  14%  |                                                                              |====================                                                  |  29%  |                                                                              |==============================                                        |  43%  |                                                                              |========================================                              |  57%  |                                                                              |==================================================                    |  71%  |                                                                              |============================================================          |  86%  |                                                                              |======================================================================| 100%</span></span>
+<span><span class="co">#&gt; INFO  [2024-08-27 19:57:20]  == Comparisons for all proteins are done.</span></span></code></pre></div>
+</div>
+<div class="section level2">
+<h2 id="msstatsbionet-analysis">MSstatsBioNet Analysis<a class="anchor" aria-label="anchor" href="#msstatsbionet-analysis"></a>
+</h2>
+<div class="section level3">
+<h3 id="id-conversion">ID Conversion<a class="anchor" aria-label="anchor" href="#id-conversion"></a>
+</h3>
+<p>First, we need to convert the group comparison results to a format
+that can be processed by INDRA. The <code>getSubnetworkFromIndra</code>
+function requires a table containing HGNC IDs. We can use the following
+mapping to convert from Uniprot to HGNC ID. This mapping was obtained
+from this <a href="https://indra.readthedocs.io/en/docstrings/modules/databases/index.html#indra.databases.hgnc_client.get_hgnc_id" class="external-link">Python
+uniprot client</a></p>
+<p>In the future, this uniprot client will be added as a separate
+function to allow users to perform this conversion in R in a streamlined
+way.</p>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">uniprot_to_hgnc_mapping</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
+<span>    <span class="st">"B9A064"</span> <span class="op">=</span> <span class="st">"38476"</span>,</span>
+<span>    <span class="st">"O00391"</span> <span class="op">=</span> <span class="st">"9756"</span>,</span>
+<span>    <span class="st">"O14818"</span> <span class="op">=</span> <span class="st">"9536"</span>,</span>
+<span>    <span class="st">"O43598"</span> <span class="op">=</span> <span class="st">"21218"</span>,</span>
+<span>    <span class="st">"O43707"</span> <span class="op">=</span> <span class="st">"166"</span>,</span>
+<span>    <span class="st">"P16050"</span> <span class="op">=</span> <span class="st">"11390"</span>,</span>
+<span>    <span class="st">"P84243"</span> <span class="op">=</span> <span class="st">"4765"</span></span>
+<span><span class="op">)</span></span>
+<span><span class="va">groupComparisonResult</span><span class="op">$</span><span class="va">ComparisonResult</span><span class="op">$</span><span class="va">HgncId</span> <span class="op">=</span> <span class="va">uniprot_to_hgnc_mapping</span><span class="op">[</span></span>
+<span>    <span class="va">groupComparisonResult</span><span class="op">$</span><span class="va">ComparisonResult</span><span class="op">$</span><span class="va">Protein</span></span>
+<span><span class="op">]</span></span></code></pre></div>
+</div>
+<div class="section level3">
+<h3 id="subnetwork-query">Subnetwork Query<a class="anchor" aria-label="anchor" href="#subnetwork-query"></a>
+</h3>
 <p>The package provides a function <code>getSubnetworkFromIndra</code>
 that retrieves a subnetwork of proteins from the INDRA database based on
 differential abundance analysis results. The function
 <code>visualizeNetworks</code> then takes the output of
 <code>getSubnetworkFromIndra</code> and visualizes the subnetwork.</p>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">input</span> <span class="op">&lt;-</span> <span class="fu">data.table</span><span class="fu">::</span><span class="fu"><a href="https://rdatatable.gitlab.io/data.table/reference/fread.html" class="external-link">fread</a></span><span class="op">(</span></span>
-<span>    <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"processed_data/groupComparisonModel.csv"</span>,</span>
-<span>        package <span class="op">=</span> <span class="st">"MSstatsBioNet"</span></span>
-<span>    <span class="op">)</span></span>
-<span><span class="op">)</span></span>
-<span><span class="va">subnetwork</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/getSubnetworkFromIndra.html">getSubnetworkFromIndra</a></span><span class="op">(</span><span class="va">input</span><span class="op">)</span></span>
-<span><span class="fu"><a href="../reference/visualizeNetworks.html">visualizeNetworks</a></span><span class="op">(</span><span class="va">subnetwork</span><span class="op">$</span><span class="va">nodes</span>, <span class="va">subnetwork</span><span class="op">$</span><span class="va">edges</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span></span>
+<span><span class="va">subnetwork</span> <span class="op">=</span> <span class="fu"><a href="../reference/getSubnetworkFromIndra.html">getSubnetworkFromIndra</a></span><span class="op">(</span><span class="va">groupComparisonResult</span><span class="op">$</span><span class="va">ComparisonResult</span><span class="op">)</span></span></code></pre></div>
 <p>This package is distributed under the <a href="https://opensource.org/licenses/Artistic-2.0" class="external-link">Artistic-2.0</a>
 license. However, its dependencies may have different licenses. In this
 example, getSubnetworkFromIndra depends on INDRA, which is distributed
@@ -92,10 +216,17 @@ different licenses for commercial applications. Please refer to the <a href="htt
 README</a> for more information on its knowledge sources and their
 associated licenses.</p>
 </div>
+<div class="section level3">
+<h3 id="visualize-networks">Visualize Networks<a class="anchor" aria-label="anchor" href="#visualize-networks"></a>
+</h3>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/visualizeNetworks.html">visualizeNetworks</a></span><span class="op">(</span><span class="va">subnetwork</span><span class="op">$</span><span class="va">nodes</span>, <span class="va">subnetwork</span><span class="op">$</span><span class="va">edges</span><span class="op">)</span></span></code></pre></div>
+</div>
+</div>
 <div class="section level2">
 <h2 id="session-info">Session info<a class="anchor" aria-label="anchor" href="#session-info"></a>
 </h2>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/sessionInfo.html" class="external-link">sessionInfo</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; R version 4.4.1 (2024-06-14)</span></span>
 <span><span class="co">#&gt; Platform: x86_64-pc-linux-gnu</span></span>
@@ -118,28 +249,40 @@ associated licenses.</p>
 <span><span class="co">#&gt; [1] stats     graphics  grDevices utils     datasets  methods   base     </span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; other attached packages:</span></span>
-<span><span class="co">#&gt; [1] MSstatsBioNet_0.99.1</span></span>
+<span><span class="co">#&gt; [1] MSstats_4.12.1        MSstatsConvert_1.14.0 MSstatsBioNet_0.99.1 </span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; loaded via a namespace (and not attached):</span></span>
-<span><span class="co">#&gt;  [1] base64url_1.4       jsonlite_1.8.8      compiler_4.4.1     </span></span>
-<span><span class="co">#&gt;  [4] crayon_1.5.3        gtools_3.9.5        IRdisplay_1.1      </span></span>
-<span><span class="co">#&gt;  [7] bitops_1.0-8        RCy3_2.24.0         jquerylib_0.1.4    </span></span>
-<span><span class="co">#&gt; [10] systemfonts_1.1.0   textshaping_0.4.0   uuid_1.2-1         </span></span>
-<span><span class="co">#&gt; [13] yaml_2.3.10         fastmap_1.2.0       IRkernel_1.3.2     </span></span>
-<span><span class="co">#&gt; [16] R6_2.5.1            knitr_1.48          backports_1.5.0    </span></span>
-<span><span class="co">#&gt; [19] BiocGenerics_0.50.0 graph_1.82.0        XML_3.99-0.17      </span></span>
-<span><span class="co">#&gt; [22] desc_1.4.3          bslib_0.8.0         pillar_1.9.0       </span></span>
-<span><span class="co">#&gt; [25] RColorBrewer_1.1-3  rlang_1.1.4         utf8_1.2.4         </span></span>
-<span><span class="co">#&gt; [28] cachem_1.1.0        stringi_1.8.4       repr_1.1.7         </span></span>
-<span><span class="co">#&gt; [31] xfun_0.47           caTools_1.18.2      fs_1.6.4           </span></span>
-<span><span class="co">#&gt; [34] sass_0.4.9          RJSONIO_1.3-1.9     cli_3.6.3          </span></span>
-<span><span class="co">#&gt; [37] pkgdown_2.1.0       digest_0.6.37       base64enc_0.1-3    </span></span>
-<span><span class="co">#&gt; [40] pbdZMQ_0.3-11       lifecycle_1.0.4     r2r_0.1.1          </span></span>
-<span><span class="co">#&gt; [43] vctrs_0.6.5         KernSmooth_2.23-24  evaluate_0.24.0    </span></span>
-<span><span class="co">#&gt; [46] glue_1.7.0          ragg_1.3.2          stats4_4.4.1       </span></span>
-<span><span class="co">#&gt; [49] RCurl_1.98-1.16     fansi_1.0.6         rmarkdown_2.28     </span></span>
-<span><span class="co">#&gt; [52] httr_1.4.7          gplots_3.1.3.1      tools_4.4.1        </span></span>
-<span><span class="co">#&gt; [55] htmltools_0.5.8.1</span></span></code></pre></div>
+<span><span class="co">#&gt;  [1] tidyselect_1.2.1      viridisLite_0.4.2     IRdisplay_1.1        </span></span>
+<span><span class="co">#&gt;  [4] dplyr_1.1.4           bitops_1.0-8          lazyeval_0.2.2       </span></span>
+<span><span class="co">#&gt;  [7] fastmap_1.2.0         RCurl_1.98-1.16       XML_3.99-0.17        </span></span>
+<span><span class="co">#&gt; [10] digest_0.6.37         base64url_1.4         lifecycle_1.0.4      </span></span>
+<span><span class="co">#&gt; [13] survival_3.6-4        statmod_1.5.0         magrittr_2.0.3       </span></span>
+<span><span class="co">#&gt; [16] compiler_4.4.1        r2r_0.1.1             rlang_1.1.4          </span></span>
+<span><span class="co">#&gt; [19] sass_0.4.9            tools_4.4.1           utf8_1.2.4           </span></span>
+<span><span class="co">#&gt; [22] yaml_2.3.10           data.table_1.15.4     knitr_1.48           </span></span>
+<span><span class="co">#&gt; [25] htmlwidgets_1.6.4     marray_1.82.0         repr_1.1.7           </span></span>
+<span><span class="co">#&gt; [28] RColorBrewer_1.1-3    KernSmooth_2.23-24    pbdZMQ_0.3-11        </span></span>
+<span><span class="co">#&gt; [31] purrr_1.0.2           BiocGenerics_0.50.0   desc_1.4.3           </span></span>
+<span><span class="co">#&gt; [34] grid_4.4.1            stats4_4.4.1          preprocessCore_1.66.0</span></span>
+<span><span class="co">#&gt; [37] fansi_1.0.6           caTools_1.18.2        colorspace_2.1-1     </span></span>
+<span><span class="co">#&gt; [40] log4r_0.4.3           ggplot2_3.5.1         scales_1.3.0         </span></span>
+<span><span class="co">#&gt; [43] gtools_3.9.5          MASS_7.3-60.2         cli_3.6.3            </span></span>
+<span><span class="co">#&gt; [46] rmarkdown_2.28        crayon_1.5.3          ragg_1.3.2           </span></span>
+<span><span class="co">#&gt; [49] generics_0.1.3        httr_1.4.7            minqa_1.2.8          </span></span>
+<span><span class="co">#&gt; [52] cachem_1.1.0          splines_4.4.1         parallel_4.4.1       </span></span>
+<span><span class="co">#&gt; [55] base64enc_0.1-3       vctrs_0.6.5           boot_1.3-30          </span></span>
+<span><span class="co">#&gt; [58] Matrix_1.7-0          jsonlite_1.8.8        ggrepel_0.9.5        </span></span>
+<span><span class="co">#&gt; [61] systemfonts_1.1.0     plotly_4.10.4         limma_3.60.4         </span></span>
+<span><span class="co">#&gt; [64] tidyr_1.3.1           jquerylib_0.1.4       glue_1.7.0           </span></span>
+<span><span class="co">#&gt; [67] pkgdown_2.1.0         nloptr_2.1.1          RJSONIO_1.3-1.9      </span></span>
+<span><span class="co">#&gt; [70] stringi_1.8.4         gtable_0.3.5          lme4_1.1-35.5        </span></span>
+<span><span class="co">#&gt; [73] munsell_0.5.1         tibble_3.2.1          pillar_1.9.0         </span></span>
+<span><span class="co">#&gt; [76] htmltools_0.5.8.1     gplots_3.1.3.1        RCy3_2.24.0          </span></span>
+<span><span class="co">#&gt; [79] IRkernel_1.3.2        graph_1.82.0          R6_2.5.1             </span></span>
+<span><span class="co">#&gt; [82] textshaping_0.4.0     evaluate_0.24.0       lattice_0.22-6       </span></span>
+<span><span class="co">#&gt; [85] backports_1.5.0       bslib_0.8.0           Rcpp_1.0.13          </span></span>
+<span><span class="co">#&gt; [88] uuid_1.2-1            nlme_3.1-164          checkmate_2.3.2      </span></span>
+<span><span class="co">#&gt; [91] xfun_0.47             fs_1.6.4              pkgconfig_2.0.3</span></span></code></pre></div>
 </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside>
