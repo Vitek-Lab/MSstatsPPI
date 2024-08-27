@@ -36,14 +36,15 @@ input = data.table::fread(input)
 annot = system.file("tinytest/raw_data/Metamorpheus/Annotation.tsv", 
                                 package = "MSstatsConvert")
 annot = data.table::fread(annot)
-msstats_imported = MetamorpheusToMSstatsFormat(input, annotation = annot)
+msstats_imported = MetamorpheusToMSstatsFormat(input, annotation = annot, 
+                                               use_log_file = FALSE)
 head(msstats_imported)
 ```
 
 # MSstats Process and GroupComparison
 
 ```{r}
-library(MSstatsConvert)
+library(MSstats)
 QuantData = dataProcess(msstats_imported, use_log_file = FALSE)
 groupComparisonResult = groupComparison(contrast.matrix="pairwise", 
                                         data=QuantData, 
@@ -59,6 +60,9 @@ processed by INDRA.  The `getSubnetworkFromIndra` function requires a table
 containing HGNC IDs.  We can use the following mapping to convert from Uniprot
 to HGNC ID.  This mapping was obtained from this 
 [Python uniprot client](https://indra.readthedocs.io/en/docstrings/modules/databases/index.html#indra.databases.hgnc_client.get_hgnc_id)
+
+In the future, this uniprot client will be added as a separate function to allow
+users to perform this conversion in R in a streamlined way.
 
 ```{r}
 uniprot_to_hgnc_mapping = c(
@@ -91,7 +95,7 @@ This package is distributed under the [Artistic-2.0](https://opensource.org/lice
 
 ## Visualize Networks
 
-```{r proteinNetworkDiscovery, eval=FALSE}
+```{r visualizeNetwork, eval=FALSE}
 visualizeNetworks(subnetwork$nodes, subnetwork$edges)
 ```
 
