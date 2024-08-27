@@ -27,7 +27,9 @@ Suggests:
     knitr,
     rmarkdown,
     testthat (>= 3.0.0),
-    mockery
+    mockery,
+    MSstats,
+    MSstatsConvert
 VignetteBuilder: knitr
 biocViews: ImmunoOncology, MassSpectrometry, Proteomics, Software, 
     QualityControl, NetworkEnrichment, Network

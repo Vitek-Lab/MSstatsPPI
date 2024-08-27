@@ -34,6 +34,7 @@
         input <- input[input$adj.pvalue < pvalue_cutoff, ]
     }
     input <- input[is.na(input$issue), ]
+    input$Protein <- as.character(input$Protein)
     return(input)
 }
 
