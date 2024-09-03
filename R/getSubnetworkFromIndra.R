@@ -14,9 +14,9 @@
 #'     "extdata/groupComparisonModel.csv",
 #'     package = "MSstatsBioNet"
 #' ))
-#' # subnetwork = getSubnetworkFromIndra(input, pvalue_cutoff = 0.05)
-#' # head(subnetwork$nodes)
-#' # head(subnetwork$edges)
+#' subnetwork <- getSubnetworkFromIndra(input, pvalue_cutoff = 0.05)
+#' head(subnetwork$nodes)
+#' head(subnetwork$edges)
 #'
 getSubnetworkFromIndra <- function(input, pvalue_cutoff = NULL) {
     input <- .filterGetSubnetworkFromIndraInput(input, pvalue_cutoff)
@@ -24,10 +24,10 @@ getSubnetworkFromIndra <- function(input, pvalue_cutoff = NULL) {
     nodes <- .constructNodesDataFrame(input)
     edges <- .constructEdgesDataFrame(res, input)
     warning(
-        "NOTICE: This function includes third-party software components 
-        that are licensed under the BSD 2-Clause License. Please ensure to 
-        include the third-party licensing agreements if redistributing this 
-        package or utilizing the results based on this package. 
+        "NOTICE: This function includes third-party software components
+        that are licensed under the BSD 2-Clause License. Please ensure to
+        include the third-party licensing agreements if redistributing this
+        package or utilizing the results based on this package.
         See the LICENSE file for more details."
     )
     return(list(nodes = nodes, edges = edges))

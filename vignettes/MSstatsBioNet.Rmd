@@ -30,14 +30,18 @@ networks. The package is designed to be used in conjunction with the
 
 ```{r}
 library(MSstatsConvert)
-input = system.file("tinytest/raw_data/Metamorpheus/AllQuantifiedPeaks.tsv", 
-                                package = "MSstatsConvert")
-input = data.table::fread(input)
-annot = system.file("tinytest/raw_data/Metamorpheus/Annotation.tsv", 
-                                package = "MSstatsConvert")
-annot = data.table::fread(annot)
-msstats_imported = MetamorpheusToMSstatsFormat(input, annotation = annot, 
-                                               use_log_file = FALSE)
+input <- system.file("tinytest/raw_data/Metamorpheus/AllQuantifiedPeaks.tsv",
+    package = "MSstatsConvert"
+)
+input <- data.table::fread(input)
+annot <- system.file("tinytest/raw_data/Metamorpheus/Annotation.tsv",
+    package = "MSstatsConvert"
+)
+annot <- data.table::fread(annot)
+msstats_imported <- MetamorpheusToMSstatsFormat(input,
+    annotation = annot,
+    use_log_file = FALSE
+)
 head(msstats_imported)
 ```
 
@@ -45,10 +49,12 @@ head(msstats_imported)
 
 ```{r}
 library(MSstats)
-QuantData = dataProcess(msstats_imported, use_log_file = FALSE)
-groupComparisonResult = groupComparison(contrast.matrix="pairwise", 
-                                        data=QuantData, 
-                                        use_log_file = FALSE)
+QuantData <- dataProcess(msstats_imported, use_log_file = FALSE)
+groupComparisonResult <- groupComparison(
+    contrast.matrix = "pairwise",
+    data = QuantData,
+    use_log_file = FALSE
+)
 ```
 
 # MSstatsBioNet Analysis
@@ -65,7 +71,7 @@ In the future, this uniprot client will be added as a separate function to allow
 users to perform this conversion in R in a streamlined way.
 
 ```{r}
-uniprot_to_hgnc_mapping = c(
+uniprot_to_hgnc_mapping <- c(
     "B9A064" = "38476",
     "O00391" = "9756",
     "O14818" = "9536",
@@ -74,7 +80,7 @@ uniprot_to_hgnc_mapping = c(
     "P16050" = "11390",
     "P84243" = "4765"
 )
-groupComparisonResult$ComparisonResult$HgncId = uniprot_to_hgnc_mapping[
+groupComparisonResult$ComparisonResult$HgncId <- uniprot_to_hgnc_mapping[
     groupComparisonResult$ComparisonResult$Protein
 ]
 ```
@@ -83,19 +89,21 @@ groupComparisonResult$ComparisonResult$HgncId = uniprot_to_hgnc_mapping[
 
 The package provides a function `getSubnetworkFromIndra` that retrieves a
 subnetwork of proteins from the INDRA database based on differential abundance
-analysis results.  The function `visualizeNetworks` then takes the output
-of `getSubnetworkFromIndra` and visualizes the subnetwork.
+analysis results.  
 
-```{r proteinNetworkDiscovery, eval=FALSE}
-
-subnetwork = getSubnetworkFromIndra(groupComparisonResult$ComparisonResult)
+```{r}
+subnetwork <- getSubnetworkFromIndra(groupComparisonResult$ComparisonResult)
 ```
+
 This package is distributed under the [Artistic-2.0](https://opensource.org/licenses/Artistic-2.0) license.  However, its dependencies may have different licenses.  In this example, getSubnetworkFromIndra depends on INDRA, which is distributed under the [BSD 2-Clause](https://opensource.org/license/bsd-2-clause) license.  Furthermore, INDRA's knowledge sources may have different licenses for commercial applications.  Please refer to the [INDRA README](https://github.com/sorgerlab/indra?tab=readme-ov-file#indra-modules) for more information on its knowledge sources and their associated licenses.
 
 
 ## Visualize Networks
 
-```{r visualizeNetwork, eval=FALSE}
+The function `visualizeNetworks` then takes the output of 
+`getSubnetworkFromIndra` and visualizes the subnetwork.
+
+```{r}
 visualizeNetworks(subnetwork$nodes, subnetwork$edges)
 ```
 

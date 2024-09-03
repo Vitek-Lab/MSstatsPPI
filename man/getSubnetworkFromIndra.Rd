@@ -24,8 +24,8 @@ input <- data.table::fread(system.file(
     "extdata/groupComparisonModel.csv",
     package = "MSstatsBioNet"
 ))
-# subnetwork = getSubnetworkFromIndra(input, pvalue_cutoff = 0.05)
-# head(subnetwork$nodes)
-# head(subnetwork$edges)
+subnetwork <- getSubnetworkFromIndra(input, pvalue_cutoff = 0.05)
+head(subnetwork$nodes)
+head(subnetwork$edges)
 
 }

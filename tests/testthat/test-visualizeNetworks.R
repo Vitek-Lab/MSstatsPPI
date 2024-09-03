@@ -3,6 +3,11 @@ test_that("visualizeNetworks works correctly", {
         package = "MSstatsBioNet"
     ))
 
+    mock_interactive <- mock(TRUE)
+    stub(
+        visualizeNetworks, "interactive",
+        mock_interactive
+    )
     mock_createNetworkFromDataFrames <- mock()
     stub(
         visualizeNetworks, "createNetworkFromDataFrames",
@@ -37,6 +42,11 @@ test_that("visualizeNetworks with p-value and logFC constraints works", {
         package = "MSstatsBioNet"
     ))
 
+    mock_interactive <- mock(TRUE)
+    stub(
+        visualizeNetworks, "interactive",
+        mock_interactive
+    )
     mock_createNetworkFromDataFrames <- mock()
     stub(
         visualizeNetworks, "createNetworkFromDataFrames",
