@@ -3,6 +3,11 @@ test_that("visualizeNetworks works correctly", {
         package = "MSstatsBioNet"
     ))
 
+    mock_interactive <- mock(TRUE)
+    stub(
+        visualizeNetworks, "interactive",
+        mock_interactive
+    )
     mock_createNetworkFromDataFrames <- mock()
     stub(
         visualizeNetworks, "createNetworkFromDataFrames",
@@ -37,6 +42,11 @@ test_that("visualizeNetworks with p-value and logFC constraints works", {
         package = "MSstatsBioNet"
     ))
 
+    mock_interactive <- mock(TRUE)
+    stub(
+        visualizeNetworks, "interactive",
+        mock_interactive
+    )
     mock_createNetworkFromDataFrames <- mock()
     stub(
         visualizeNetworks, "createNetworkFromDataFrames",
@@ -71,4 +81,20 @@ test_that("visualizeNetworks with p-value and logFC constraints works", {
         nodes[input$nodes$id == "BRD3_HUMAN", ]$logFC_color, 3.33342794
     )
     expect_equal(nodes[input$nodes$id == "BRD4_HUMAN", ]$logFC_color, 0)
+})
+
+test_that("visualizeNetworks returns warning for non-interactive calls", {
+    input <- readRDS(system.file("extdata/subnetwork.rds",
+                                 package = "MSstatsBioNet"
+    ))
+    
+    mock_interactive <- mock(FALSE)
+    stub(
+        visualizeNetworks, "interactive",
+        mock_interactive
+    )
+    
+    expect_warning(visualizeNetworks(input$nodes, input$edges,
+                                    pvalue_cutoff = 0.01, logfc_cutoff = 2.5
+    ))
 })

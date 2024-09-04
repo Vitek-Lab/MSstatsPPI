@@ -2,7 +2,8 @@
 % Please edit documentation in R/visualizeNetworks.R
 \name{visualizeNetworks}
 \alias{visualizeNetworks}
-\title{Create visualization of subnetwork in cytoscape}
+\title{Create visualization of network in Cytoscape Desktop.  Note that the
+Cytoscape Desktop app must be open for this function to work.}
 \usage{
 visualizeNetworks(nodes, edges, pvalue_cutoff = 0.05, logfc_cutoff = 0.5)
 }
@@ -21,14 +22,15 @@ proteins. Default is 0.5}
 cytoscape visualization of subnetwork
 }
 \description{
-Create visualization of subnetwork in cytoscape
+Create visualization of network in Cytoscape Desktop.  Note that the
+Cytoscape Desktop app must be open for this function to work.
 }
 \examples{
 input <- data.table::fread(system.file(
     "extdata/groupComparisonModel.csv",
     package = "MSstatsBioNet"
 ))
-# subnetwork = getSubnetworkFromIndra(input)
-# visualizeNetworks(subnetwork$nodes, subnetwork$edges)
+subnetwork <- getSubnetworkFromIndra(input)
+visualizeNetworks(subnetwork$nodes, subnetwork$edges)
 
 }
