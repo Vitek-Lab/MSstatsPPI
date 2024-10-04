@@ -31,5 +31,5 @@ head(subnetwork$edges)
 
 }
 \seealso{
-\code{\link{groupComparison}}
+\code{\link[MSstats]{groupComparison}}
 }

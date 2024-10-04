@@ -9,7 +9,7 @@
 #' filtering
 #'
 #' @return list of 2 data.frames, nodes and edges
-#' @seealso \code{\link{groupComparison}}
+#' @seealso \code{\link[MSstats]{groupComparison}}
 #'
 #' @export
 #'
