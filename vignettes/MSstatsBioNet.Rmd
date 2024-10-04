@@ -22,8 +22,9 @@ knitr::opts_chunk$set(
 Run this code below to install MSstatsBioNet from bioconductor
 
 ```{r eval = FALSE}
-if (!require("BiocManager", quietly = TRUE))
+if (!require("BiocManager", quietly = TRUE)) {
     install.packages("BiocManager")
+}
 
 BiocManager::install("MSstatsBioNet")
 ```

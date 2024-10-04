@@ -85,16 +85,16 @@ test_that("visualizeNetworks with p-value and logFC constraints works", {
 
 test_that("visualizeNetworks returns warning for non-interactive calls", {
     input <- readRDS(system.file("extdata/subnetwork.rds",
-                                 package = "MSstatsBioNet"
+        package = "MSstatsBioNet"
     ))
-    
+
     mock_interactive <- mock(FALSE)
     stub(
         visualizeNetworks, "interactive",
         mock_interactive
     )
-    
+
     expect_warning(visualizeNetworks(input$nodes, input$edges,
-                                    pvalueCutoff = 0.01, logfcCutoff = 2.5
+        pvalueCutoff = 0.01, logfcCutoff = 2.5
     ))
 })
