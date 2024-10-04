@@ -2,13 +2,13 @@
 % Please edit documentation in R/getSubnetworkFromIndra.R
 \name{getSubnetworkFromIndra}
 \alias{getSubnetworkFromIndra}
-\title{Get subnetwork from INDRA database with differential analysis results}
+\title{Get subnetwork from INDRA database}
 \usage{
 getSubnetworkFromIndra(input, pvalueCutoff = NULL)
 }
 \arguments{
-\item{input}{groupComparison comparisionResult table with additional HGNC ID
-and HGNC name columns}
+\item{input}{output of groupComparison function's comparisionResult table 
+with additional HGNC ID and HGNC name columns}
 
 \item{pvalueCutoff}{p-value cutoff for filtering. Default is NULL, i.e. no
 filtering}
@@ -17,7 +17,8 @@ filtering}
 list of 2 data.frames, nodes and edges
 }
 \description{
-Get subnetwork from INDRA database with differential analysis results
+Using differential abundance results from MSstats, this function retrieves
+a subnetwork of protein interactions from INDRA database.
 }
 \examples{
 input <- data.table::fread(system.file(
@@ -28,4 +29,7 @@ subnetwork <- getSubnetworkFromIndra(input, pvalueCutoff = 0.05)
 head(subnetwork$nodes)
 head(subnetwork$edges)
 
+}
+\seealso{
+\code{\link{groupComparison}}
 }

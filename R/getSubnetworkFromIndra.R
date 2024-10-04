@@ -1,11 +1,15 @@
-#' Get subnetwork from INDRA database with differential analysis results
+#' Get subnetwork from INDRA database
+#' 
+#' Using differential abundance results from MSstats, this function retrieves
+#' a subnetwork of protein interactions from INDRA database.
 #'
-#' @param input groupComparison comparisionResult table with additional HGNC ID
-#' and HGNC name columns
+#' @param input output of groupComparison function's comparisionResult table 
+#' with additional HGNC ID and HGNC name columns 
 #' @param pvalueCutoff p-value cutoff for filtering. Default is NULL, i.e. no
 #' filtering
 #'
 #' @return list of 2 data.frames, nodes and edges
+#' @seealso \code{\link{groupComparison}}
 #'
 #' @export
 #'

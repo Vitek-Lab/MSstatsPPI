@@ -1,8 +1,14 @@
-#' Create visualization of network in Cytoscape Desktop.  Note that the
-#' Cytoscape Desktop app must be open for this function to work.
+#' Create visualization of network
+#' 
+#' Use results from INDRA to generate a visualization of the a network on 
+#' Cytoscape Desktop.  Note that the Cytoscape Desktop app must be open for 
+#' this function to work.
 #'
-#' @param nodes dataframe of nodes
-#' @param edges dataframe of edges
+#' @param nodes dataframe of nodes consisting of columns 
+#' id (chararacter), pvalue (number), logFC (number)
+#' @param edges dataframe of edges consisting of columns
+#' source (character), target (character), interaction (character), 
+#' evidenceCount (number), evidenceLink (character)
 #' @param pvalueCutoff p-value cutoff for coloring significant proteins.
 #' Default is 0.05
 #' @param logfcCutoff log fold change cutoff for coloring significant
