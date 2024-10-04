@@ -1,11 +1,17 @@
-#' Create visualization of network in Cytoscape Desktop.  Note that the
-#' Cytoscape Desktop app must be open for this function to work.
+#' Create visualization of network
 #'
-#' @param nodes dataframe of nodes
-#' @param edges dataframe of edges
-#' @param pvalue_cutoff p-value cutoff for coloring significant proteins.
+#' Use results from INDRA to generate a visualization of the a network on
+#' Cytoscape Desktop.  Note that the Cytoscape Desktop app must be open for
+#' this function to work.
+#'
+#' @param nodes dataframe of nodes consisting of columns
+#' id (chararacter), pvalue (number), logFC (number)
+#' @param edges dataframe of edges consisting of columns
+#' source (character), target (character), interaction (character),
+#' evidenceCount (number), evidenceLink (character)
+#' @param pvalueCutoff p-value cutoff for coloring significant proteins.
 #' Default is 0.05
-#' @param logfc_cutoff log fold change cutoff for coloring significant
+#' @param logfcCutoff log fold change cutoff for coloring significant
 #' proteins. Default is 0.5
 #' @importFrom RCy3 createNetworkFromDataFrames mapVisualProperty
 #' createVisualStyle setVisualStyle
@@ -24,11 +30,11 @@
 #'
 #'
 visualizeNetworks <- function(nodes, edges,
-                              pvalue_cutoff = 0.05, logfc_cutoff = 0.5) {
+                              pvalueCutoff = 0.05, logfcCutoff = 0.5) {
     # Add additional columns for visualization
     nodes$logFC_color <- nodes$logFC
-    nodes$logFC_color[nodes$pvalue > pvalue_cutoff |
-        abs(nodes$logFC) < logfc_cutoff] <- 0
+    nodes$logFC_color[nodes$pvalue > pvalueCutoff |
+        abs(nodes$logFC) < logfcCutoff] <- 0
 
     # Create network
     if (interactive()) {
@@ -48,7 +54,7 @@ visualizeNetworks <- function(nodes, edges,
             mapVisualProperty("Node Label", "id", "p"),
             mapVisualProperty(
                 "Node Fill Color", "logFC_color", "c",
-                c(-logfc_cutoff, 0.0, logfc_cutoff),
+                c(-logfcCutoff, 0.0, logfcCutoff),
                 c("#5588DD", "#5588DD", "#D3D3D3", "#DD8855", "#DD8855")
             )
         )

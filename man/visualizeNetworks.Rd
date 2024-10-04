@@ -2,28 +2,31 @@
 % Please edit documentation in R/visualizeNetworks.R
 \name{visualizeNetworks}
 \alias{visualizeNetworks}
-\title{Create visualization of network in Cytoscape Desktop.  Note that the
-Cytoscape Desktop app must be open for this function to work.}
+\title{Create visualization of network}
 \usage{
-visualizeNetworks(nodes, edges, pvalue_cutoff = 0.05, logfc_cutoff = 0.5)
+visualizeNetworks(nodes, edges, pvalueCutoff = 0.05, logfcCutoff = 0.5)
 }
 \arguments{
-\item{nodes}{dataframe of nodes}
+\item{nodes}{dataframe of nodes consisting of columns 
+id (chararacter), pvalue (number), logFC (number)}
 
-\item{edges}{dataframe of edges}
+\item{edges}{dataframe of edges consisting of columns
+source (character), target (character), interaction (character), 
+evidenceCount (number), evidenceLink (character)}
 
-\item{pvalue_cutoff}{p-value cutoff for coloring significant proteins.
+\item{pvalueCutoff}{p-value cutoff for coloring significant proteins.
 Default is 0.05}
 
-\item{logfc_cutoff}{log fold change cutoff for coloring significant
+\item{logfcCutoff}{log fold change cutoff for coloring significant
 proteins. Default is 0.5}
 }
 \value{
 cytoscape visualization of subnetwork
 }
 \description{
-Create visualization of network in Cytoscape Desktop.  Note that the
-Cytoscape Desktop app must be open for this function to work.
+Use results from INDRA to generate a visualization of the a network on 
+Cytoscape Desktop.  Note that the Cytoscape Desktop app must be open for 
+this function to work.
 }
 \examples{
 input <- data.table::fread(system.file(

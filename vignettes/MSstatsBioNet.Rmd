@@ -1,6 +1,8 @@
 ---
-title: "MSstatsBioNet"
-output: rmarkdown::html_vignette
+title: "MSstatsBioNet Introduction"
+author: "Anthony Wu"
+package: MSstatsBioNet
+output: BiocStyle::html_document
 vignette: >
   %\VignetteIndexEntry{MSstatsBioNet: Introduction}
   %\VignetteEngine{knitr::rmarkdown}
@@ -14,8 +16,17 @@ knitr::opts_chunk$set(
 )
 ```
 
-```{r setup}
-library(MSstatsBioNet)
+
+# Installation
+
+Run this code below to install MSstatsBioNet from bioconductor
+
+```{r eval = FALSE}
+if (!require("BiocManager", quietly = TRUE)) {
+    install.packages("BiocManager")
+}
+
+BiocManager::install("MSstatsBioNet")
 ```
 
 # Purpose of MSstatsBioNet
@@ -45,6 +56,13 @@ msstats_imported <- MetamorpheusToMSstatsFormat(input,
 head(msstats_imported)
 ```
 
+We will first convert the input data to a format that can be processed by 
+MSstats.  In this example, the `MetamorpheusToMSstatsFormat` function is used 
+to convert the input data from Metamorpheus to MSstats format.  The MSstats
+format will contain the necessary information for downstream analysis, such
+as peptide information, abundance values, run ID, and experimental annotation
+information.
+
 # MSstats Process and GroupComparison
 
 ```{r}
@@ -56,6 +74,11 @@ groupComparisonResult <- groupComparison(
     use_log_file = FALSE
 )
 ```
+
+Next, we will preprocess the data using the `dataProcess` function and perform
+a statistical analysis using the `groupComparison` function.  The output of 
+`groupComparison` is a table containing a list of differentially abundant 
+proteins with their associated p-values and log fold changes.  
 
 # MSstatsBioNet Analysis
 
@@ -71,6 +94,7 @@ In the future, this uniprot client will be added as a separate function to allow
 users to perform this conversion in R in a streamlined way.
 
 ```{r}
+library(MSstatsBioNet)
 uniprot_to_hgnc_mapping <- c(
     "B9A064" = "38476",
     "O00391" = "9756",
@@ -101,13 +125,15 @@ This package is distributed under the [Artistic-2.0](https://opensource.org/lice
 ## Visualize Networks
 
 The function `visualizeNetworks` then takes the output of 
-`getSubnetworkFromIndra` and visualizes the subnetwork.
+`getSubnetworkFromIndra` and visualizes the subnetwork. The function requires
+Cytoscape desktop to be open for the visualization to work.
 
 ```{r}
 visualizeNetworks(subnetwork$nodes, subnetwork$edges)
 ```
-
-
+In the network diagram displayed in Cytoscape, you should see two arrows
+connecting two nodes, P16050 and P84243.  These arrows represent the 
+interactions between these two proteins, notably activation and phosphorylation.
 
 # Session info
 

@@ -2,30 +2,35 @@
 % Please edit documentation in R/getSubnetworkFromIndra.R
 \name{getSubnetworkFromIndra}
 \alias{getSubnetworkFromIndra}
-\title{Get subnetwork from INDRA database with differential analysis results}
+\title{Get subnetwork from INDRA database}
 \usage{
-getSubnetworkFromIndra(input, pvalue_cutoff = NULL)
+getSubnetworkFromIndra(input, pvalueCutoff = NULL)
 }
 \arguments{
-\item{input}{groupComparison comparisionResult table with additional HGNC ID
-and HGNC name columns}
+\item{input}{output of groupComparison function's comparisionResult table, 
+which contains a list of proteins and their corresponding p-values, logFCs,
+along with additional HGNC ID and HGNC name columns}
 
-\item{pvalue_cutoff}{p-value cutoff for filtering. Default is NULL, i.e. no
+\item{pvalueCutoff}{p-value cutoff for filtering. Default is NULL, i.e. no
 filtering}
 }
 \value{
 list of 2 data.frames, nodes and edges
 }
 \description{
-Get subnetwork from INDRA database with differential analysis results
+Using differential abundance results from MSstats, this function retrieves
+a subnetwork of protein interactions from INDRA database.
 }
 \examples{
 input <- data.table::fread(system.file(
     "extdata/groupComparisonModel.csv",
     package = "MSstatsBioNet"
 ))
-subnetwork <- getSubnetworkFromIndra(input, pvalue_cutoff = 0.05)
+subnetwork <- getSubnetworkFromIndra(input, pvalueCutoff = 0.05)
 head(subnetwork$nodes)
 head(subnetwork$edges)
 
+}
+\seealso{
+\code{\link[MSstats]{groupComparison}}
 }
