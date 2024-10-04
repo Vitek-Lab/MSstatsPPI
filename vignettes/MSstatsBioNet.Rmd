@@ -1,6 +1,8 @@
 ---
-title: "MSstatsBioNet"
-output: rmarkdown::html_vignette
+title: "MSstatsBioNet Introduction"
+author: "Anthony Wu"
+package: MSstatsBioNet
+output: BiocStyle::html_document
 vignette: >
   %\VignetteIndexEntry{MSstatsBioNet: Introduction}
   %\VignetteEngine{knitr::rmarkdown}
@@ -14,8 +16,14 @@ knitr::opts_chunk$set(
 )
 ```
 
-```{r setup}
-library(MSstatsBioNet)
+
+# Installation
+
+```{r eval = FALSE}
+if (!require("BiocManager", quietly = TRUE))
+    install.packages("BiocManager")
+
+BiocManager::install("MSstatsConvert")
 ```
 
 # Purpose of MSstatsBioNet
@@ -71,6 +79,7 @@ In the future, this uniprot client will be added as a separate function to allow
 users to perform this conversion in R in a streamlined way.
 
 ```{r}
+library(MSstatsBioNet)
 uniprot_to_hgnc_mapping <- c(
     "B9A064" = "38476",
     "O00391" = "9756",
