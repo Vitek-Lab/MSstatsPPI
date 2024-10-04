@@ -2,7 +2,7 @@
 #'
 #' @param input groupComparison comparisionResult table with additional HGNC ID
 #' and HGNC name columns
-#' @param pvalue_cutoff p-value cutoff for filtering. Default is NULL, i.e. no
+#' @param pvalueCutoff p-value cutoff for filtering. Default is NULL, i.e. no
 #' filtering
 #'
 #' @return list of 2 data.frames, nodes and edges
@@ -14,12 +14,12 @@
 #'     "extdata/groupComparisonModel.csv",
 #'     package = "MSstatsBioNet"
 #' ))
-#' subnetwork <- getSubnetworkFromIndra(input, pvalue_cutoff = 0.05)
+#' subnetwork <- getSubnetworkFromIndra(input, pvalueCutoff = 0.05)
 #' head(subnetwork$nodes)
 #' head(subnetwork$edges)
 #'
-getSubnetworkFromIndra <- function(input, pvalue_cutoff = NULL) {
-    input <- .filterGetSubnetworkFromIndraInput(input, pvalue_cutoff)
+getSubnetworkFromIndra <- function(input, pvalueCutoff = NULL) {
+    input <- .filterGetSubnetworkFromIndraInput(input, pvalueCutoff)
     res <- .callIndraCogexApi(input$HgncId)
     nodes <- .constructNodesDataFrame(input)
     edges <- .constructEdgesDataFrame(res, input)

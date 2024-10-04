@@ -69,7 +69,7 @@ test_that("visualizeNetworks with p-value and logFC constraints works", {
     )
 
     expect_silent(visualizeNetworks(input$nodes, input$edges,
-        pvalue_cutoff = 0.01, logfc_cutoff = 2.5
+        pvalueCutoff = 0.01, logfcCutoff = 2.5
     ))
     expect_called(mock_createNetworkFromDataFrames, 1)
     calls <- mock_args(mock_createNetworkFromDataFrames)
@@ -95,6 +95,6 @@ test_that("visualizeNetworks returns warning for non-interactive calls", {
     )
     
     expect_warning(visualizeNetworks(input$nodes, input$edges,
-                                    pvalue_cutoff = 0.01, logfc_cutoff = 2.5
+                                    pvalueCutoff = 0.01, logfcCutoff = 2.5
     ))
 })

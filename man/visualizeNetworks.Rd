@@ -5,17 +5,17 @@
 \title{Create visualization of network in Cytoscape Desktop.  Note that the
 Cytoscape Desktop app must be open for this function to work.}
 \usage{
-visualizeNetworks(nodes, edges, pvalue_cutoff = 0.05, logfc_cutoff = 0.5)
+visualizeNetworks(nodes, edges, pvalueCutoff = 0.05, logfcCutoff = 0.5)
 }
 \arguments{
 \item{nodes}{dataframe of nodes}
 
 \item{edges}{dataframe of edges}
 
-\item{pvalue_cutoff}{p-value cutoff for coloring significant proteins.
+\item{pvalueCutoff}{p-value cutoff for coloring significant proteins.
 Default is 0.05}
 
-\item{logfc_cutoff}{log fold change cutoff for coloring significant
+\item{logfcCutoff}{log fold change cutoff for coloring significant
 proteins. Default is 0.5}
 }
 \value{

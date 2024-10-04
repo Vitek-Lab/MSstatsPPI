@@ -4,13 +4,13 @@
 \alias{getSubnetworkFromIndra}
 \title{Get subnetwork from INDRA database with differential analysis results}
 \usage{
-getSubnetworkFromIndra(input, pvalue_cutoff = NULL)
+getSubnetworkFromIndra(input, pvalueCutoff = NULL)
 }
 \arguments{
 \item{input}{groupComparison comparisionResult table with additional HGNC ID
 and HGNC name columns}
 
-\item{pvalue_cutoff}{p-value cutoff for filtering. Default is NULL, i.e. no
+\item{pvalueCutoff}{p-value cutoff for filtering. Default is NULL, i.e. no
 filtering}
 }
 \value{
@@ -24,7 +24,7 @@ input <- data.table::fread(system.file(
     "extdata/groupComparisonModel.csv",
     package = "MSstatsBioNet"
 ))
-subnetwork <- getSubnetworkFromIndra(input, pvalue_cutoff = 0.05)
+subnetwork <- getSubnetworkFromIndra(input, pvalueCutoff = 0.05)
 head(subnetwork$nodes)
 head(subnetwork$edges)
 

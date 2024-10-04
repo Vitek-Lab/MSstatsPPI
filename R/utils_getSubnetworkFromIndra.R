@@ -1,20 +1,20 @@
 #' Call INDRA Cogex API and return response
-#' @param hgnc_ids list of hgnc_ids
+#' @param hgncIds list of hgnc ids
 #' @return list of INDRA statements
 #' @importFrom jsonlite toJSON
 #' @importFrom httr POST add_headers content
 #' @keywords internal
 #' @noRd
-.callIndraCogexApi <- function(hgnc_ids) {
-    INDRA_COGEX_URL <-
+.callIndraCogexApi <- function(hgncIds) {
+    indraCogexUrl <-
         "https://discovery.indra.bio/api/indra_subnetwork_relations"
 
-    groundings <- lapply(hgnc_ids, function(x) list("HGNC", x))
+    groundings <- lapply(hgncIds, function(x) list("HGNC", x))
     groundings <- list(nodes = groundings)
     groundings <- jsonlite::toJSON(groundings, auto_unbox = TRUE)
 
     res <- POST(
-        INDRA_COGEX_URL,
+        indraCogexUrl,
         body = groundings,
         add_headers("Content-Type" = "application/json"),
         encode = "raw"
@@ -25,13 +25,13 @@
 
 #' Filter groupComparison result input based on user-defined cutoffs
 #' @param input groupComparison result
-#' @param pvalue_cutoff p-value cutoff
+#' @param pvalueCutoff p-value cutoff
 #' @return filtered groupComparison result
 #' @keywords internal
 #' @noRd
-.filterGetSubnetworkFromIndraInput <- function(input, pvalue_cutoff) {
-    if (!is.null(pvalue_cutoff)) {
-        input <- input[input$adj.pvalue < pvalue_cutoff, ]
+.filterGetSubnetworkFromIndraInput <- function(input, pvalueCutoff) {
+    if (!is.null(pvalueCutoff)) {
+        input <- input[input$adj.pvalue < pvalueCutoff, ]
     }
     input <- input[is.na(input$issue), ]
     input$Protein <- as.character(input$Protein)
@@ -66,23 +66,23 @@
 #' @keywords internal
 #' @noRd
 .collapseDuplicateEdgesIntoEdgeToMetadataMapping <- function(res, input) {
-    edge_to_metadata_mapping <- hashmap()
+    edgeToMetadataMapping <- hashmap()
 
     for (edge in res) {
         key <- paste(edge$source_id, edge$target_id, edge$data$stmt_type,
             sep = "_"
         )
-        if (key %in% keys(edge_to_metadata_mapping)) {
-            edge_to_metadata_mapping[[key]]$data$evidence_count <-
-                edge_to_metadata_mapping[[key]]$data$evidence_count +
+        if (key %in% keys(edgeToMetadataMapping)) {
+            edgeToMetadataMapping[[key]]$data$evidence_count <-
+                edgeToMetadataMapping[[key]]$data$evidence_count +
                 edge$data$evidence_count
         } else {
             edge <- .addAdditionalMetadataToIndraEdge(edge, input)
-            edge_to_metadata_mapping[[key]] <- edge
+            edgeToMetadataMapping[[key]] <- edge
         }
     }
 
-    return(edge_to_metadata_mapping)
+    return(edgeToMetadataMapping)
 }
 
 #' Construct edges data.frame from INDRA response
