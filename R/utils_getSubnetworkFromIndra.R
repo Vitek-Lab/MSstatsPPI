@@ -48,8 +48,7 @@
     edge$evidence_list <- paste(
         "https://db.indra.bio/statements/from_agents?subject=",
         edge$source_id, "@HGNC&object=",
-        edge$target_id, "@HGNC&type=",
-        edge$data$stmt_type, "&format=html",
+        edge$target_id, "@HGNC&format=html",
         sep = ""
     )
     edge$source_uniprot_id <- input[input$HgncId == edge$source_id, ]$Protein
@@ -69,17 +68,24 @@
     edgeToMetadataMapping <- hashmap()
 
     for (edge in res) {
-        key <- paste(edge$source_id, edge$target_id, edge$data$stmt_type,
-            sep = "_"
-        )
+        key <- paste(edge$source_id, edge$target_id, sep = "_")
         if (key %in% keys(edgeToMetadataMapping)) {
             edgeToMetadataMapping[[key]]$data$evidence_count <-
                 edgeToMetadataMapping[[key]]$data$evidence_count +
                 edge$data$evidence_count
+            edgeToMetadataMapping[[key]]$data$stmt_type <- unique(c(
+                edgeToMetadataMapping[[key]]$data$stmt_type,
+                edge$data$stmt_type))
         } else {
             edge <- .addAdditionalMetadataToIndraEdge(edge, input)
             edgeToMetadataMapping[[key]] <- edge
         }
+    }
+    
+    for (key in keys(edgeToMetadataMapping)) {
+        edgeToMetadataMapping[[key]]$data$stmt_type <-
+            paste(unique(edgeToMetadataMapping[[key]]$data$stmt_type), 
+                  collapse = ", ")
     }
 
     return(edgeToMetadataMapping)

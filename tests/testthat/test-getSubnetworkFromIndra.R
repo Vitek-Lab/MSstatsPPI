@@ -7,7 +7,7 @@ test_that("getSubnetworkFromIndra works correctly", {
     })
     suppressWarnings(subnetwork <- getSubnetworkFromIndra(input))
     expect_equal(nrow(subnetwork$nodes), 7)
-    expect_equal(nrow(subnetwork$edges), 2)
+    expect_equal(nrow(subnetwork$edges), 1)
 })
 
 test_that("getSubnetworkFromIndra with pvalue filter works correctly", {
@@ -21,5 +21,5 @@ test_that("getSubnetworkFromIndra with pvalue filter works correctly", {
         subnetwork <- getSubnetworkFromIndra(input, pvalueCutoff = 0.45)
     )
     expect_equal(nrow(subnetwork$nodes), 6)
-    expect_equal(nrow(subnetwork$edges), 2)
+    expect_equal(nrow(subnetwork$edges), 1)
 })
