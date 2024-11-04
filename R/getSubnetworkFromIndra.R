@@ -25,6 +25,7 @@
 #'
 getSubnetworkFromIndra <- function(input, pvalueCutoff = NULL) {
     input <- .filterGetSubnetworkFromIndraInput(input, pvalueCutoff)
+    # Perform protein ID conversions
     res <- .callIndraCogexApi(input$HgncId)
     nodes <- .constructNodesDataFrame(input)
     edges <- .constructEdgesDataFrame(res, input)
