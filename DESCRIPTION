@@ -20,7 +20,8 @@ Imports:
     RCy3,
     httr,
     jsonlite,
-    r2r
+    r2r,
+    MSstats
 Suggests: 
     data.table,
     BiocStyle,
@@ -28,7 +29,6 @@ Suggests:
     rmarkdown,
     testthat (>= 3.0.0),
     mockery,
-    MSstats,
     MSstatsConvert
 VignetteBuilder: knitr
 biocViews: ImmunoOncology, MassSpectrometry, Proteomics, Software, 
