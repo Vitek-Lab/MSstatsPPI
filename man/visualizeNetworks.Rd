@@ -7,11 +7,11 @@
 visualizeNetworks(nodes, edges, pvalueCutoff = 0.05, logfcCutoff = 0.5)
 }
 \arguments{
-\item{nodes}{dataframe of nodes consisting of columns 
+\item{nodes}{dataframe of nodes consisting of columns
 id (chararacter), pvalue (number), logFC (number)}
 
 \item{edges}{dataframe of edges consisting of columns
-source (character), target (character), interaction (character), 
+source (character), target (character), interaction (character),
 evidenceCount (number), evidenceLink (character)}
 
 \item{pvalueCutoff}{p-value cutoff for coloring significant proteins.
@@ -24,8 +24,8 @@ proteins. Default is 0.5}
 cytoscape visualization of subnetwork
 }
 \description{
-Use results from INDRA to generate a visualization of the a network on 
-Cytoscape Desktop.  Note that the Cytoscape Desktop app must be open for 
+Use results from INDRA to generate a visualization of the a network on
+Cytoscape Desktop.  Note that the Cytoscape Desktop app must be open for
 this function to work.
 }
 \examples{

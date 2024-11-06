@@ -7,9 +7,10 @@
 getSubnetworkFromIndra(input, pvalueCutoff = NULL)
 }
 \arguments{
-\item{input}{output of groupComparison function's comparisionResult table, 
-which contains a list of proteins and their corresponding p-values, logFCs,
-along with additional HGNC ID and HGNC name columns}
+\item{input}{output of \code{\link[MSstats]{groupComparison}} function's 
+comparisionResult table, which contains a list of proteins and their 
+corresponding p-values, logFCs, along with additional HGNC ID and HGNC 
+name columns}
 
 \item{pvalueCutoff}{p-value cutoff for filtering. Default is NULL, i.e. no
 filtering}
@@ -30,7 +31,4 @@ subnetwork <- getSubnetworkFromIndra(input, pvalueCutoff = 0.05)
 head(subnetwork$nodes)
 head(subnetwork$edges)
 
-}
-\seealso{
-\code{\link[MSstats]{groupComparison}}
 }
