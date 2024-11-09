@@ -178,5 +178,3 @@ annotateProteinInfoFromIndra <- function(df, proteinIdType) {
         }
         return(df)
 }
-
-.onLoad()
