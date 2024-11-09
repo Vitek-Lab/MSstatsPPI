@@ -52,9 +52,9 @@ annotateProteinInfoFromIndra <- function(df, proteinIdType) {
 #'        It can be either "Uniprot" or "Uniprot_Mnemonic".
 #' @return A data frame with populated Uniprot IDs.
 .populateUniprotIdsInDataFrame <- function(df, proteinIdType) {
-        df$UniprotID <- NA
+        df$UniprotId <- NA
         if (proteinIdType == "Uniprot") {
-                df$UniprotID <- df$Protein
+                df$UniprotId <- df$Protein
         }
         
         if (proteinIdType == "Uniprot_Mnemonic") {
@@ -63,7 +63,7 @@ annotateProteinInfoFromIndra <- function(df, proteinIdType) {
                         uniprotMapping <- .callGetUniprotIdsFromUniprotMnemonicIdsApi(as.list(mnemonicProteins))
                         for (mnemonicId in names(uniprotMapping)) {
                                 if (!is.null(uniprotMapping[[mnemonicId]])) {
-                                        df$UniprotID[df$Protein == mnemonicId] <- uniprotMapping[[mnemonicId]]
+                                        df$UniprotId[df$Protein == mnemonicId] <- uniprotMapping[[mnemonicId]]
                                 }
                         }
                 }
@@ -78,14 +78,14 @@ annotateProteinInfoFromIndra <- function(df, proteinIdType) {
 #' @param df A data frame containing protein information.
 #' @return A data frame with populated HGNC IDs.
 .populateHgncIdsInDataFrame <- function(df) {
-        df$HgncID <- NA
-        validMask <- !is.na(df$UniprotID)
-        validUniprots <- unique(df$UniprotID[validMask])
+        df$HgncId <- NA
+        validMask <- !is.na(df$UniprotId)
+        validUniprots <- unique(df$UniprotId[validMask])
         if (length(validUniprots) > 0) {
                 hgncMapping <- .callGetHgncIdsFromUniprotIdsApi(as.list(validUniprots))
                 for (uniprotId in names(hgncMapping)) {
                         if (!is.null(hgncMapping[[uniprotId]])) {
-                                df$HgncID[df$UniprotID == uniprotId] <- hgncMapping[[uniprotId]]
+                                df$HgncId[df$UniprotId == uniprotId] <- hgncMapping[[uniprotId]]
                         }
                 }
         }
@@ -100,13 +100,13 @@ annotateProteinInfoFromIndra <- function(df, proteinIdType) {
 #' @return A data frame with populated HGNC names.
 .populateHgncNamesInDataFrame <- function(df) {
         df$HgncName <- NA
-        validHgncMask <- !is.na(df$HgncID)
-        validHgncs <- unique(df$HgncID[validHgncMask])
+        validHgncMask <- !is.na(df$HgncId)
+        validHgncs <- unique(df$HgncId[validHgncMask])
         if (length(validHgncs) > 0) {
                 nameMapping <- .callGetHgncNamesFromHgncIdsApi(as.list(validHgncs))
                 for (hgncId in names(nameMapping)) {
                         if (!is.null(nameMapping[[hgncId]])) {
-                                df$HgncName[df$HgncID == hgncId] <- nameMapping[[hgncId]]
+                                df$HgncName[df$HgncId == hgncId] <- nameMapping[[hgncId]]
                         }
                 }
         }
