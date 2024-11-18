@@ -1,6 +1,9 @@
 # Test .callGetUniprotIdsFromUniprotMnemonicIdsApi
 test_that(".callGetUniprotIdsFromUniprotMnemonicIdsApi works correctly", {
     uniprotMnemonicIds <- list("CLH1_HUMAN")
+    local_mocked_bindings(.callGetUniprotIdsFromUniprotMnemonicIdsApi = function(x) {
+        return(list(CLH1_HUMAN = "Q00610"))
+    })
     result <- .callGetUniprotIdsFromUniprotMnemonicIdsApi(uniprotMnemonicIds)
     expect_type(result, "list")
     expect_true(length(result) == 1)
@@ -11,6 +14,9 @@ test_that(".callGetUniprotIdsFromUniprotMnemonicIdsApi works correctly", {
 # Test .callGetHgncIdsFromUniprotIdsApi
 test_that(".callGetHgncIdsFromUniprotIdsApi works correctly", {
     uniprotIds <- list("Q00610")
+    local_mocked_bindings(.callGetHgncIdsFromUniprotIdsApi = function(x) {
+        return(list("Q00610" = "2092"))
+    })
     result <- .callGetHgncIdsFromUniprotIdsApi(uniprotIds)
     expect_type(result, "list")
     expect_true(length(result) == 1)
@@ -21,6 +27,9 @@ test_that(".callGetHgncIdsFromUniprotIdsApi works correctly", {
 # Test .callGetHgncNamesFromHgncIdsApi
 test_that(".callGetHgncNamesFromHgncIdsApi works correctly", {
     hgncIds <- list("2092")
+    local_mocked_bindings(.callGetHgncNamesFromHgncIdsApi = function(x) {
+        return(list("2092" = "CLTC"))
+    })
     result <- .callGetHgncNamesFromHgncIdsApi(hgncIds)
     expect_type(result, "list")
     expect_true(length(result) == 1)
@@ -31,6 +40,9 @@ test_that(".callGetHgncNamesFromHgncIdsApi works correctly", {
 # Test .callIsKinaseApi
 test_that(".callIsKinaseApi works correctly", {
     kinaseGenes <- list("CHEK1")
+    local_mocked_bindings(.callIsKinaseApi = function(x) {
+        return(list("CHEK1" = TRUE))
+    })
     result <- .callIsKinaseApi(kinaseGenes)
     expect_type(result, "list")
     expect_true(length(result) == 1)
@@ -41,6 +53,9 @@ test_that(".callIsKinaseApi works correctly", {
 # Test .callIsPhosphataseApi
 test_that(".callIsPhosphataseApi works correctly", {
     phosphataseGenes <- list("MTM1")
+    local_mocked_bindings(.callIsPhosphataseApi = function(x) {
+        return(list("MTM1" = TRUE))
+    })
     result <- .callIsPhosphataseApi(phosphataseGenes)
     expect_type(result, "list")
     expect_true(length(result) == 1)
@@ -51,6 +66,9 @@ test_that(".callIsPhosphataseApi works correctly", {
 # Test .callIsTranscriptionFactorApi
 test_that(".callIsTranscriptionFactorApi works correctly", {
     transcriptionFactorGenes <- list("STAT1")
+    local_mocked_bindings(.callIsTranscriptionFactorApi = function(x) {
+        return(list("STAT1" = TRUE))
+    })
     result <- .callIsTranscriptionFactorApi(transcriptionFactorGenes)
     expect_type(result, "list")
     expect_true(length(result) == 1)

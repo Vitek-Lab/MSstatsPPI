@@ -2,9 +2,12 @@
 #'
 #' This function annotates a data frame with protein information from Indra.
 #'
-#' @param df A data frame containing protein information.
+#' @param input output of \code{\link[MSstats]{groupComparison}} function's 
+#'      comparisonResult table, which contains a list of proteins and their 
+#'      corresponding p-values, logFCs, along with additional HGNC ID and HGNC 
+#'      name columns
 #' @param proteinIdType A character string specifying the type of protein ID. 
-#'        It can be either "Uniprot" or "Uniprot_Mnemonic".
+#'      It can be either "Uniprot" or "Uniprot_Mnemonic".
 #' @return A data frame with the following columns:
 #' \describe{
 #'   \item{Protein}{Character. The original protein identifier.}
