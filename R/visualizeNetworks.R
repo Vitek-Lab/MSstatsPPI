@@ -30,7 +30,8 @@
 #'
 #'
 visualizeNetworks <- function(nodes, edges,
-                              pvalueCutoff = 0.05, logfcCutoff = 0.5) {
+                              pvalueCutoff = 0.05, 
+                              logfcCutoff = 0.5) {
     # Add additional columns for visualization
     nodes$logFC_color <- nodes$logFC
     nodes$logFC_color[nodes$pvalue > pvalueCutoff |
@@ -64,6 +65,7 @@ visualizeNetworks <- function(nodes, edges,
             VISUAL_STYLE_MAPPINGS
         )
         setVisualStyle(VISUAL_STYLE_NAME)
+        layoutNetwork("cose")
     } else {
         warning("Visualization is not available in non-interactive mode.")
     }
