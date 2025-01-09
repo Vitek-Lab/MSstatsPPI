@@ -57,7 +57,8 @@ visualizeNetworks <- function(nodes, edges,
                 "Node Fill Color", "logFC_color", "c",
                 c(-logfcCutoff, 0.0, logfcCutoff),
                 c("#ADD8E6", "#ADD8E6", "#D3D3D3", "#FFA590", "#FFA590")
-            )
+            ),
+            mapVisualProperty("Edge Label", "interaction", "p")
         )
         createVisualStyle(
             VISUAL_STYLE_NAME,
