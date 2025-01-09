@@ -7,7 +7,10 @@
 annotateProteinInfoFromIndra(df, proteinIdType)
 }
 \arguments{
-\item{df}{A data frame containing protein information.}
+\item{df}{output of \code{\link[MSstats]{groupComparison}} function's 
+comparisonResult table, which contains a list of proteins and their 
+corresponding p-values, logFCs, along with additional HGNC ID and HGNC 
+name columns}
 
 \item{proteinIdType}{A character string specifying the type of protein ID. 
 It can be either "Uniprot" or "Uniprot_Mnemonic".}

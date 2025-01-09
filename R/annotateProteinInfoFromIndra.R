@@ -2,7 +2,7 @@
 #'
 #' This function annotates a data frame with protein information from Indra.
 #'
-#' @param input output of \code{\link[MSstats]{groupComparison}} function's 
+#' @param df output of \code{\link[MSstats]{groupComparison}} function's 
 #'      comparisonResult table, which contains a list of proteins and their 
 #'      corresponding p-values, logFCs, along with additional HGNC ID and HGNC 
 #'      name columns

@@ -25,6 +25,7 @@
 #'
 getSubnetworkFromIndra <- function(input, pvalueCutoff = NULL) {
     input <- .filterGetSubnetworkFromIndraInput(input, pvalueCutoff)
+    .validateGetSubnetworkFromIndraInput(input)
     res <- .callIndraCogexApi(input$HgncId)
     nodes <- .constructNodesDataFrame(input)
     edges <- .constructEdgesDataFrame(res, input)

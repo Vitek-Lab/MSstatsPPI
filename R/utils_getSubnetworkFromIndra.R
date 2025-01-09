@@ -1,3 +1,16 @@
+#' Validate input for MSstatsBioNet getSubnetworkFromIndra
+#' @param input dataframe from MSstats groupComparison output
+#' @keywords internal
+#' @noRd
+.validateGetSubnetworkFromIndraInput <- function(input) {
+    if (!"HgncId" %in% colnames(input)) {
+        stop("Invalid Input Error: Input must contain a column named 'HgncId'.")
+    }
+    if (nrow(input) >= 400) {
+        stop("Invalid Input Error: INDRA query must contain less than 400 proteins.  Consider adding a p-value cutoff")
+    }
+}
+
 #' Call INDRA Cogex API and return response
 #' @param hgncIds list of hgnc ids
 #' @return list of INDRA statements
