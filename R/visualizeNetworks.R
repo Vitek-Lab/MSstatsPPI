@@ -14,7 +14,7 @@
 #' @param logfcCutoff log fold change cutoff for coloring significant
 #' proteins. Default is 0.5
 #' @importFrom RCy3 createNetworkFromDataFrames mapVisualProperty
-#' createVisualStyle setVisualStyle
+#' createVisualStyle setVisualStyle layoutNetwork
 #'
 #' @export
 #'
@@ -56,7 +56,7 @@ visualizeNetworks <- function(nodes, edges,
             mapVisualProperty(
                 "Node Fill Color", "logFC_color", "c",
                 c(-logfcCutoff, 0.0, logfcCutoff),
-                c("#5588DD", "#5588DD", "#D3D3D3", "#DD8855", "#DD8855")
+                c("#ADD8E6", "#ADD8E6", "#D3D3D3", "#FFA590", "#FFA590")
             )
         )
         createVisualStyle(
