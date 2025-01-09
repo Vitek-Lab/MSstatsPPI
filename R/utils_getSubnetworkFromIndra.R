@@ -3,6 +3,9 @@
 #' @keywords internal
 #' @noRd
 .validateGetSubnetworkFromIndraInput <- function(input) {
+    if (!"HgncId" %in% colnames(input)) {
+        stop("Invalid Input Error: Input must contain a column named 'HgncId'.")
+    }
     if (nrow(input) >= 400) {
         stop("Invalid Input Error: INDRA query must contain less than 400 proteins.  Consider adding a p-value cutoff")
     }
