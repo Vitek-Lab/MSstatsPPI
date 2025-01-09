@@ -7,6 +7,13 @@
 <url><loc>https://vitek-lab.github.io/MSstatsBioNet/index.html</loc></url>
 <url><loc>https://vitek-lab.github.io/MSstatsBioNet/news/index.html</loc></url>
 <url><loc>https://vitek-lab.github.io/MSstatsBioNet/reference/annotateProteinInfoFromIndra.html</loc></url>
+<url><loc>https://vitek-lab.github.io/MSstatsBioNet/reference/dot-populateHgncIdsInDataFrame.html</loc></url>
+<url><loc>https://vitek-lab.github.io/MSstatsBioNet/reference/dot-populateHgncNamesInDataFrame.html</loc></url>
+<url><loc>https://vitek-lab.github.io/MSstatsBioNet/reference/dot-populateKinaseInfoInDataFrame.html</loc></url>
+<url><loc>https://vitek-lab.github.io/MSstatsBioNet/reference/dot-populatePhophataseInfoInDataFrame.html</loc></url>
+<url><loc>https://vitek-lab.github.io/MSstatsBioNet/reference/dot-populateTranscriptionFactorInfoInDataFrame.html</loc></url>
+<url><loc>https://vitek-lab.github.io/MSstatsBioNet/reference/dot-populateUniprotIdsInDataFrame.html</loc></url>
+<url><loc>https://vitek-lab.github.io/MSstatsBioNet/reference/dot-validateAnnotateProteinInfoFromIndraInput.html</loc></url>
 <url><loc>https://vitek-lab.github.io/MSstatsBioNet/reference/getSubnetworkFromIndra.html</loc></url>
 <url><loc>https://vitek-lab.github.io/MSstatsBioNet/reference/index.html</loc></url>
 <url><loc>https://vitek-lab.github.io/MSstatsBioNet/reference/visualizeNetworks.html</loc></url>
