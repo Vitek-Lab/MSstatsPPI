@@ -28,12 +28,18 @@ test_that("visualizeNetworks works correctly", {
         visualizeNetworks, "setVisualStyle",
         mock_setVisualStyle
     )
+    mock_layoutNetwork <- mock()
+    stub(
+        visualizeNetworks, "layoutNetwork",
+        mock_layoutNetwork
+    )
 
     expect_silent(visualizeNetworks(input$nodes, input$edges))
     expect_called(mock_createNetworkFromDataFrames, 1)
     expect_called(mock_mapVisualProperty, 2)
     expect_called(mock_createVisualStyle, 1)
     expect_called(mock_setVisualStyle, 1)
+    expect_called(mock_layoutNetwork, 1)
 })
 
 
@@ -66,6 +72,11 @@ test_that("visualizeNetworks with p-value and logFC constraints works", {
     stub(
         visualizeNetworks, "setVisualStyle",
         mock_setVisualStyle
+    )
+    mock_layoutNetwork <- mock()
+    stub(
+        visualizeNetworks, "layoutNetwork",
+        mock_layoutNetwork
     )
 
     expect_silent(visualizeNetworks(input$nodes, input$edges,
