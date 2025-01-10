@@ -33,13 +33,20 @@ test_that("visualizeNetworks works correctly", {
         visualizeNetworks, "layoutNetwork",
         mock_layoutNetwork
     )
+    
+    mock_addLegendInCytoscape <- mock()
+    stub(
+        visualizeNetworks, ".addLegendInCytoscape",
+        mock_addLegendInCytoscape
+    )
 
     expect_silent(visualizeNetworks(input$nodes, input$edges))
     expect_called(mock_createNetworkFromDataFrames, 1)
-    expect_called(mock_mapVisualProperty, 2)
+    expect_called(mock_mapVisualProperty, 5)
     expect_called(mock_createVisualStyle, 1)
     expect_called(mock_setVisualStyle, 1)
     expect_called(mock_layoutNetwork, 1)
+    expect_called(mock_addLegendInCytoscape, 1)
 })
 
 
@@ -78,6 +85,11 @@ test_that("visualizeNetworks with p-value and logFC constraints works", {
         visualizeNetworks, "layoutNetwork",
         mock_layoutNetwork
     )
+    mock_addLegendInCytoscape <- mock()
+    stub(
+        visualizeNetworks, ".addLegendInCytoscape",
+        mock_addLegendInCytoscape
+    )
 
     expect_silent(visualizeNetworks(input$nodes, input$edges,
         pvalueCutoff = 0.01, logfcCutoff = 2.5
@@ -108,4 +120,14 @@ test_that("visualizeNetworks returns warning for non-interactive calls", {
     expect_warning(visualizeNetworks(input$nodes, input$edges,
         pvalueCutoff = 0.01, logfcCutoff = 2.5
     ))
+})
+
+test_that("visualizeNetworks throws error for missing logFC column", {
+    input <- readRDS(system.file("extdata/subnetwork.rds",
+                                 package = "MSstatsBioNet"
+    ))
+    input$nodes <- input$nodes[, !names(input$nodes) %in% c("logFC")]
+    
+    expect_error(visualizeNetworks(input$nodes, input$edges),
+                 "The 'logFC' column is missing from the nodes dataframe.")
 })
