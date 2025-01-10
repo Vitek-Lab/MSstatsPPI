@@ -5,13 +5,13 @@ test_that(".addLegendInCytoscape works correctly", {
         list(color = "#FFA590", label = "label3")
     )
     
-    mock_getNodePosition <- mock()
+    mock_getNodePosition <- mock(data.frame(x_position = c("50", "51")))
     stub(
         .addLegendInCytoscape, "getNodePosition",
         mock_getNodePosition
     )
     
-    mock_getNetworkCenter <- mock()
+    mock_getNetworkCenter <- mock(list(x = 2, y = 5))
     stub(
         .addLegendInCytoscape, "getNetworkCenter",
         mock_getNetworkCenter
@@ -35,7 +35,7 @@ test_that(".addLegendInCytoscape works correctly", {
         mock_groupAnnotation
     )
     
-    mock_getAnnotationList <- mock()
+    mock_getAnnotationList <- mock(c("id1", "id2"))
     stub(
         .addLegendInCytoscape, "getAnnotationList",
         mock_getAnnotationList
