@@ -33,6 +33,8 @@
 visualizeNetworks <- function(nodes, edges,
                               pvalueCutoff = 0.05, 
                               logfcCutoff = 0.5) {
+    .validateVisualizeNetworks(nodes)
+    
     # Add additional columns for visualization
     nodes$logFC_color <- nodes$logFC
     nodes$logFC_color[nodes$pvalue > pvalueCutoff |

@@ -1,3 +1,13 @@
+#' Validate input for MSstatsBioNet visualizeNetworks
+#' @param nodes dataframe of nodes
+#' @keywords internal
+#' @noRd
+.validateVisualizeNetworks <- function(nodes) {
+    if (!"logFC" %in% colnames(nodes)) {
+        stop("The 'logFC' column is missing from the nodes dataframe.")
+    }
+}
+
 #' Add a legend using annotations
 #' @param legend_items list of items and properties
 #' @importFrom RCy3 addAnnotationShape addAnnotationText getNodePosition 
@@ -5,6 +15,10 @@
 #' @keywords internal
 #' @noRd
 .addLegendInCytoscape <- function(legend_items) {
+    if (!all(sapply(legend_items, function(item) all(c("color", "label") %in% names(item))))) {
+        stop("Each legend item must contain 'color' and 'label' fields.")
+    }
+    
     # Starting position for the legend
     node_coordinates <- getNodePosition()
     node_coordinates$x_location <- as.numeric(node_coordinates$x_location)
@@ -33,26 +47,28 @@
         item <- legend_items[[i]]
         y_pos <- y_start + (i - 1) * (box_size + spacing)  # Adjust position for each item
         
-        # Add a colored rectangle for the legend
-        shape_name <- addAnnotationShape(
-            type = "rectangle",
-            x.pos = x_start,
-            y.pos = y_pos,
-            width = box_size,
-            height = box_size,
-            fillColor = item$color,
-            borderColor = "black",
-            borderThickness = 1
-        )
+        shape_name <- tryCatch({
+            addAnnotationShape(
+                type = "rectangle",
+                x.pos = x_start,
+                y.pos = y_pos,
+                width = box_size,
+                height = box_size,
+                fillColor = item$color,
+                borderColor = "black",
+                borderThickness = 1
+            )
+        }, error = function(e) stop("Error adding annotation shape: ", e$message))
         
-        # Add corresponding text label
-        text_name <- addAnnotationText(
-            text = item$label,
-            x.pos = x_start + box_size + spacing,
-            y.pos = y_pos + box_size / 4,  # Center text vertically with the rectangle
-            fontSize = 12,
-            color = "black"
-        )
+        text_name <- tryCatch({
+            addAnnotationText(
+                text = item$label,
+                x.pos = x_start + box_size + spacing,
+                y.pos = y_pos + box_size / 4,  # Center text vertically with the rectangle
+                fontSize = 12,
+                color = "black"
+            )
+        }, error = function(e) stop("Error adding annotation text: ", e$message))
         
         annotation_names <- c(annotation_names, shape_name, text_name)
     }

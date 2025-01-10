@@ -42,3 +42,25 @@ test_that(".addLegendInCytoscape works correctly", {
     expect_called(mock_addAnnotationText, 4)
     expect_called(mock_groupAnnotation, 1)
 })
+
+test_that(".addLegendInCytoscape throws validation error without color", {
+    legend_items <- list(
+        list(label = "label1"),
+        list(label = "label2"),
+        list(label = "label3")
+    )
+    
+    expect_error(.addLegendInCytoscape(legend_items),
+                 "Each legend item must contain 'color' and 'label' fields.")
+})
+
+test_that(".addLegendInCytoscape throws validation error without label", {
+    legend_items <- list(
+        list(color = "#ADD8E6"),
+        list(color = "#EEEEEE"),
+        list(color = "#FFA590")
+    )
+    
+    expect_error(.addLegendInCytoscape(legend_items),
+                 "Each legend item must contain 'color' and 'label' fields.")
+})
