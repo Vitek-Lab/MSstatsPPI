@@ -5,7 +5,7 @@ test_that(".addLegendInCytoscape works correctly", {
         list(color = "#FFA590", label = "label3")
     )
     
-    mock_getNodePosition <- mock(data.frame(x_position = c("50", "51")))
+    mock_getNodePosition <- mock(data.frame(x_location = c("50", "51")))
     stub(
         .addLegendInCytoscape, "getNodePosition",
         mock_getNodePosition
@@ -17,13 +17,13 @@ test_that(".addLegendInCytoscape works correctly", {
         mock_getNetworkCenter
     )
     
-    mock_addAnnotationShape <- mock()
+    mock_addAnnotationShape <- mock("id-12345", cycle = TRUE)
     stub(
         .addLegendInCytoscape, "addAnnotationShape",
         mock_addAnnotationShape
     )
     
-    mock_addAnnotationText <- mock()
+    mock_addAnnotationText <- mock("id-12345", cycle = TRUE)
     stub(
         .addLegendInCytoscape, "addAnnotationText",
         mock_addAnnotationText
@@ -35,17 +35,10 @@ test_that(".addLegendInCytoscape works correctly", {
         mock_groupAnnotation
     )
     
-    mock_getAnnotationList <- mock(c("id1", "id2"))
-    stub(
-        .addLegendInCytoscape, "getAnnotationList",
-        mock_getAnnotationList
-    )
-    
     expect_silent(.addLegendInCytoscape(legend_items))
     expect_called(mock_getNodePosition, 1)
     expect_called(mock_getNetworkCenter, 1)
     expect_called(mock_addAnnotationShape, 3)
-    expect_called(mock_addAnnotationText, 3)
+    expect_called(mock_addAnnotationText, 4)
     expect_called(mock_groupAnnotation, 1)
-    expect_called(mock_getAnnotationList, 1)
 })
