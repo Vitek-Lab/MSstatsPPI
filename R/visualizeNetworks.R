@@ -14,7 +14,8 @@
 #' @param logfcCutoff log fold change cutoff for coloring significant
 #' proteins. Default is 0.5
 #' @importFrom RCy3 createNetworkFromDataFrames mapVisualProperty
-#' createVisualStyle setVisualStyle layoutNetwork
+#' createVisualStyle setVisualStyle layoutNetwork addAnnotationShape
+#' addAnnotationText getNodePosition getNetworkCenter
 #'
 #' @export
 #'
@@ -73,6 +74,14 @@ visualizeNetworks <- function(nodes, edges,
         )
         setVisualStyle(VISUAL_STYLE_NAME)
         layoutNetwork("cose")
+        
+        # Define legend properties
+        legend_items <- list(
+            list(color = "#ADD8E6", label = paste0("logFC < ", -logfcCutoff)),  # Blue for negative
+            list(color = "#EEEEEE", label = paste0(-logfcCutoff, "< logFC < ", logfcCutoff)), # Light gray for zero
+            list(color = "#FFA590", label = paste0("logFC > ", logfcCutoff))  # Red for positive
+        )
+        .addLegendInCytoscape(legend_items)
     } else {
         warning("Visualization is not available in non-interactive mode.")
     }
