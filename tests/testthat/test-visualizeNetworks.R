@@ -33,6 +33,12 @@ test_that("visualizeNetworks works correctly", {
         visualizeNetworks, "layoutNetwork",
         mock_layoutNetwork
     )
+    
+    mock_addLegendInCytoscape <- mock()
+    stub(
+        visualizeNetworks, ".addLegendInCytoscape",
+        mock_addLegendInCytoscape
+    )
 
     expect_silent(visualizeNetworks(input$nodes, input$edges))
     expect_called(mock_createNetworkFromDataFrames, 1)
@@ -77,6 +83,11 @@ test_that("visualizeNetworks with p-value and logFC constraints works", {
     stub(
         visualizeNetworks, "layoutNetwork",
         mock_layoutNetwork
+    )
+    mock_addLegendInCytoscape <- mock()
+    stub(
+        visualizeNetworks, ".addLegendInCytoscape",
+        mock_addLegendInCytoscape
     )
 
     expect_silent(visualizeNetworks(input$nodes, input$edges,
