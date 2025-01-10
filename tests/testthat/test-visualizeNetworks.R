@@ -46,6 +46,7 @@ test_that("visualizeNetworks works correctly", {
     expect_called(mock_createVisualStyle, 1)
     expect_called(mock_setVisualStyle, 1)
     expect_called(mock_layoutNetwork, 1)
+    expect_called(mock_addLegendInCytoscape, 1)
 })
 
 

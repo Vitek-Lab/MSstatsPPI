@@ -8,7 +8,6 @@
     # Starting position for the legend
     node_coordinates = getNodePosition()
     node_coordinates$x_location = as.numeric(node_coordinates$x_location)
-    node_coordinates$y_location = as.numeric(node_coordinates$y_location)
     x_start <- max(node_coordinates$x_location) + 50  # Place the legend 50 units to the right of the rightmost node
     y_start <-  getNetworkCenter()$y
     box_size <- 20 # Size of the color boxes
