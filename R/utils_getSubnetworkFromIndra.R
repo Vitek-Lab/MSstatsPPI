@@ -43,6 +43,7 @@
 #' @keywords internal
 #' @noRd
 .filterGetSubnetworkFromIndraInput <- function(input, pvalueCutoff) {
+    input <- input[!is.na(input$adj.pvalue),]
     if (!is.null(pvalueCutoff)) {
         input <- input[input$adj.pvalue < pvalueCutoff, ]
     }
