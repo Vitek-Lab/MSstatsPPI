@@ -11,13 +11,27 @@
         stop("Input must be a list.")
     }
 
-    if (any(!sapply(uniprotMnemonicIds, is.character))) {
-        stop("All elements in the list must be character strings representing UniProt mnemonic IDs.")
-    }
-
     if (length(uniprotMnemonicIds) == 0) {
         stop("Input list must not be empty.")
     }
+    
+    tryCatch({
+        # Attempt to convert all elements to character if not already character
+        uniprotMnemonicIds <- lapply(uniprotMnemonicIds, function(x) {
+            if (!is.character(x)) {
+                as.character(x)
+            } else {
+                x
+            }
+        })
+        
+        # Check if conversion was successful
+        if (any(!sapply(uniprotMnemonicIds, is.character))) {
+            stop("All elements in the list must be character strings representing UniProt mnemonic IDs.")
+        }
+    }, error = function(e) {
+        stop("An error occurred converting uniprot mnemonic IDs to character strings: ", e$message)
+    })
 
     apiUrl <- file.path(Sys.getenv("INDRA_API_URL"), "api/get_uniprot_ids_from_uniprot_mnemonic_ids")
 
