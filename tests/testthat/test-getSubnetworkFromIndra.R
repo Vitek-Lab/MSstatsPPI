@@ -33,7 +33,7 @@ test_that("Exception is thrown for 400+ proteins in dataframe", {
     )
     expect_error(
         getSubnetworkFromIndra(input_400),
-        "Invalid Input Error: INDRA query must contain less than 400 proteins.  Consider adding a p-value cutoff"
+        "Invalid Input Error: INDRA query must contain less than 400 proteins.  Consider lowering your p-value cutoff"
     )
 })
 
