@@ -7,7 +7,7 @@
         stop("Invalid Input Error: Input must contain a column named 'HgncId'.")
     }
     if (nrow(input) >= 400) {
-        stop("Invalid Input Error: INDRA query must contain less than 400 proteins.  Consider adding a p-value cutoff")
+        stop("Invalid Input Error: INDRA query must contain less than 400 proteins.  Consider lowering your p-value cutoff")
     }
 }
 
@@ -64,8 +64,24 @@
         edge$target_id, "@HGNC&format=html",
         sep = ""
     )
-    edge$source_uniprot_id <- input[input$HgncId == edge$source_id, ]$Protein
-    edge$target_uniprot_id <- input[input$HgncId == edge$target_id, ]$Protein
+    
+    # Convert back to uniprot IDs
+    matched_rows_source <- input[input$HgncId == edge$source_id & !is.na(input$Protein), ]
+    matched_rows_target <- input[input$HgncId == edge$target_id & !is.na(input$Protein), ]
+    
+    if (nrow(matched_rows_source) != 1 || nrow(matched_rows_target) != 1) {
+        stop(paste0(
+            "INDRA Exception: Unexpected number of matches for the following HGNC IDs in the input data: ", 
+            edge$source_id, 
+            " or ", 
+            edge$target_id, 
+            ". Each ID must match exactly one entry in the input data, but 0 or multiple matches were found. Please check the input data for duplicates or missing entries."
+        ))
+    } 
+    
+    edge$source_uniprot_id <- matched_rows_source$Protein
+    edge$target_uniprot_id <- matched_rows_target$Protein
+    
     return(edge)
 }
 
