@@ -67,8 +67,8 @@
     )
     
     # Convert back to uniprot IDs
-    matched_rows_source <- input[input$HgncId == edge$source_id & !is.na(input$Protein), ]
-    matched_rows_target <- input[input$HgncId == edge$target_id & !is.na(input$Protein), ]
+    matched_rows_source <- input[which(input$HgncId == edge$source_id), ]
+    matched_rows_target <- input[which(input$HgncId == edge$target_id), ]
     
     if (nrow(matched_rows_source) != 1 || nrow(matched_rows_target) != 1) {
         stop(paste0(
