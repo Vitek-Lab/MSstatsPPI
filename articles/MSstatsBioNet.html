@@ -98,24 +98,24 @@ package is designed to be used in conjunction with the
 <span>    annotation <span class="op">=</span> <span class="va">annot</span>,</span>
 <span>    use_log_file <span class="op">=</span> <span class="cn">FALSE</span></span>
 <span><span class="op">)</span></span>
-<span><span class="co">#&gt; INFO  [2025-01-13 16:42:57] ** Raw data from Metamorpheus imported successfully.</span></span>
-<span><span class="co">#&gt; INFO  [2025-01-13 16:42:57] ** Raw data from Metamorpheus cleaned successfully.</span></span>
-<span><span class="co">#&gt; INFO  [2025-01-13 16:42:57] ** Using provided annotation.</span></span>
-<span><span class="co">#&gt; INFO  [2025-01-13 16:42:57] ** Run labels were standardized to remove symbols such as '.' or '%'.</span></span>
-<span><span class="co">#&gt; INFO  [2025-01-13 16:42:57] ** The following options are used:</span></span>
+<span><span class="co">#&gt; INFO  [2025-01-21 22:49:15] ** Raw data from Metamorpheus imported successfully.</span></span>
+<span><span class="co">#&gt; INFO  [2025-01-21 22:49:15] ** Raw data from Metamorpheus cleaned successfully.</span></span>
+<span><span class="co">#&gt; INFO  [2025-01-21 22:49:15] ** Using provided annotation.</span></span>
+<span><span class="co">#&gt; INFO  [2025-01-21 22:49:15] ** Run labels were standardized to remove symbols such as '.' or '%'.</span></span>
+<span><span class="co">#&gt; INFO  [2025-01-21 22:49:15] ** The following options are used:</span></span>
 <span><span class="co">#&gt;   - Features will be defined by the columns: PeptideSequence, PrecursorCharge</span></span>
 <span><span class="co">#&gt;   - Shared peptides will be removed.</span></span>
 <span><span class="co">#&gt;   - Proteins with single feature will not be removed.</span></span>
 <span><span class="co">#&gt;   - Features with less than 3 measurements across runs will be removed.</span></span>
-<span><span class="co">#&gt; INFO  [2025-01-13 16:42:57] ** Features with all missing measurements across runs are removed.</span></span>
-<span><span class="co">#&gt; INFO  [2025-01-13 16:42:57] ** Shared peptides are removed.</span></span>
-<span><span class="co">#&gt; INFO  [2025-01-13 16:42:57] ** Multiple measurements in a feature and a run are summarized by summaryforMultipleRows: max</span></span>
-<span><span class="co">#&gt; INFO  [2025-01-13 16:42:57] ** Features with one or two measurements across runs are removed.</span></span>
-<span><span class="co">#&gt; INFO  [2025-01-13 16:42:57] ** Run annotation merged with quantification data.</span></span>
-<span><span class="co">#&gt; INFO  [2025-01-13 16:42:57] ** Features with one or two measurements across runs are removed.</span></span>
-<span><span class="co">#&gt; INFO  [2025-01-13 16:42:57] ** Fractionation handled.</span></span>
-<span><span class="co">#&gt; INFO  [2025-01-13 16:42:57] ** Updated quantification data to make balanced design. Missing values are marked by NA</span></span>
-<span><span class="co">#&gt; INFO  [2025-01-13 16:42:57] ** Finished preprocessing. The dataset is ready to be processed by the dataProcess function.</span></span>
+<span><span class="co">#&gt; INFO  [2025-01-21 22:49:15] ** Features with all missing measurements across runs are removed.</span></span>
+<span><span class="co">#&gt; INFO  [2025-01-21 22:49:15] ** Shared peptides are removed.</span></span>
+<span><span class="co">#&gt; INFO  [2025-01-21 22:49:15] ** Multiple measurements in a feature and a run are summarized by summaryforMultipleRows: max</span></span>
+<span><span class="co">#&gt; INFO  [2025-01-21 22:49:15] ** Features with one or two measurements across runs are removed.</span></span>
+<span><span class="co">#&gt; INFO  [2025-01-21 22:49:15] ** Run annotation merged with quantification data.</span></span>
+<span><span class="co">#&gt; INFO  [2025-01-21 22:49:15] ** Features with one or two measurements across runs are removed.</span></span>
+<span><span class="co">#&gt; INFO  [2025-01-21 22:49:15] ** Fractionation handled.</span></span>
+<span><span class="co">#&gt; INFO  [2025-01-21 22:49:15] ** Updated quantification data to make balanced design. Missing values are marked by NA</span></span>
+<span><span class="co">#&gt; INFO  [2025-01-21 22:49:15] ** Finished preprocessing. The dataset is ready to be processed by the dataProcess function.</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">msstats_imported</span><span class="op">)</span></span>
 <span><span class="co">#&gt;   ProteinName                                           PeptideSequence</span></span>
 <span><span class="co">#&gt; 1      O43707 AC[Common Fixed:Carbamidomethyl on C]LISLGYDVENDRQGEAEFNR</span></span>
@@ -164,31 +164,31 @@ annotation information.</p>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt;     savePlot</span></span>
 <span><span class="va">QuantData</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/MSstats/man/dataProcess.html" class="external-link">dataProcess</a></span><span class="op">(</span><span class="va">msstats_imported</span>, use_log_file <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
-<span><span class="co">#&gt; INFO  [2025-01-13 16:42:59] ** Log2 intensities under cutoff = 16.018  were considered as censored missing values.</span></span>
-<span><span class="co">#&gt; INFO  [2025-01-13 16:42:59] ** Log2 intensities = NA were considered as censored missing values.</span></span>
-<span><span class="co">#&gt; INFO  [2025-01-13 16:42:59] ** Use all features that the dataset originally has.</span></span>
-<span><span class="co">#&gt; INFO  [2025-01-13 16:42:59] </span></span>
+<span><span class="co">#&gt; INFO  [2025-01-21 22:49:16] ** Log2 intensities under cutoff = 16.018  were considered as censored missing values.</span></span>
+<span><span class="co">#&gt; INFO  [2025-01-21 22:49:16] ** Log2 intensities = NA were considered as censored missing values.</span></span>
+<span><span class="co">#&gt; INFO  [2025-01-21 22:49:16] ** Use all features that the dataset originally has.</span></span>
+<span><span class="co">#&gt; INFO  [2025-01-21 22:49:16] </span></span>
 <span><span class="co">#&gt;  # proteins: 7</span></span>
 <span><span class="co">#&gt;  # peptides per protein: 1-26</span></span>
 <span><span class="co">#&gt;  # features per peptide: 1-1</span></span>
-<span><span class="co">#&gt; INFO  [2025-01-13 16:42:59] Some proteins have only one feature: </span></span>
+<span><span class="co">#&gt; INFO  [2025-01-21 22:49:16] Some proteins have only one feature: </span></span>
 <span><span class="co">#&gt;  O00391 ...</span></span>
-<span><span class="co">#&gt; INFO  [2025-01-13 16:42:59] </span></span>
+<span><span class="co">#&gt; INFO  [2025-01-21 22:49:16] </span></span>
 <span><span class="co">#&gt;                     neg pos</span></span>
 <span><span class="co">#&gt;              # runs   2   2</span></span>
 <span><span class="co">#&gt;     # bioreplicates   2   2</span></span>
 <span><span class="co">#&gt;  # tech. replicates   1   1</span></span>
-<span><span class="co">#&gt; INFO  [2025-01-13 16:42:59]  == Start the summarization per subplot...</span></span>
+<span><span class="co">#&gt; INFO  [2025-01-21 22:49:16]  == Start the summarization per subplot...</span></span>
 <span><span class="co">#&gt;   |                                                                              |                                                                      |   0%  |                                                                              |==========                                                            |  14%  |                                                                              |====================                                                  |  29%  |                                                                              |==============================                                        |  43%  |                                                                              |========================================                              |  57%  |                                                                              |==================================================                    |  71%  |                                                                              |============================================================          |  86%  |                                                                              |======================================================================| 100%</span></span>
-<span><span class="co">#&gt; INFO  [2025-01-13 16:42:59]  == Summarization is done.</span></span>
+<span><span class="co">#&gt; INFO  [2025-01-21 22:49:17]  == Summarization is done.</span></span>
 <span><span class="va">groupComparisonResult</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/MSstats/man/groupComparison.html" class="external-link">groupComparison</a></span><span class="op">(</span></span>
 <span>    contrast.matrix <span class="op">=</span> <span class="st">"pairwise"</span>,</span>
 <span>    data <span class="op">=</span> <span class="va">QuantData</span>,</span>
 <span>    use_log_file <span class="op">=</span> <span class="cn">FALSE</span></span>
 <span><span class="op">)</span></span>
-<span><span class="co">#&gt; INFO  [2025-01-13 16:42:59]  == Start to test and get inference in whole plot ...</span></span>
+<span><span class="co">#&gt; INFO  [2025-01-21 22:49:17]  == Start to test and get inference in whole plot ...</span></span>
 <span><span class="co">#&gt;   |                                                                              |                                                                      |   0%  |                                                                              |==========                                                            |  14%  |                                                                              |====================                                                  |  29%  |                                                                              |==============================                                        |  43%  |                                                                              |========================================                              |  57%  |                                                                              |==================================================                    |  71%  |                                                                              |============================================================          |  86%  |                                                                              |======================================================================| 100%</span></span>
-<span><span class="co">#&gt; INFO  [2025-01-13 16:42:59]  == Comparisons for all proteins are done.</span></span></code></pre></div>
+<span><span class="co">#&gt; INFO  [2025-01-21 22:49:17]  == Comparisons for all proteins are done.</span></span></code></pre></div>
 <p>Next, we will preprocess the data using the <code>dataProcess</code>
 function and perform a statistical analysis using the
 <code>groupComparison</code> function. The output of
@@ -291,7 +291,7 @@ phosphorylation.</p>
 <span><span class="co">#&gt; [1] stats     graphics  grDevices utils     datasets  methods   base     </span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; other attached packages:</span></span>
-<span><span class="co">#&gt; [1] MSstatsBioNet_0.99.6  MSstats_4.14.0        MSstatsConvert_1.16.1</span></span>
+<span><span class="co">#&gt; [1] MSstatsBioNet_0.99.6  MSstats_4.14.1        MSstatsConvert_1.16.1</span></span>
 <span><span class="co">#&gt; [4] BiocStyle_2.34.0     </span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; loaded via a namespace (and not attached):</span></span>
@@ -300,7 +300,7 @@ phosphorylation.</p>
 <span><span class="co">#&gt;  [7] fastmap_1.2.0         lazyeval_0.2.2        base64url_1.4        </span></span>
 <span><span class="co">#&gt; [10] XML_3.99-0.18         digest_0.6.37         lifecycle_1.0.4      </span></span>
 <span><span class="co">#&gt; [13] survival_3.7-0        statmod_1.5.0         r2r_0.1.2            </span></span>
-<span><span class="co">#&gt; [16] magrittr_2.0.3        compiler_4.4.2        rlang_1.1.4          </span></span>
+<span><span class="co">#&gt; [16] magrittr_2.0.3        compiler_4.4.2        rlang_1.1.5          </span></span>
 <span><span class="co">#&gt; [19] sass_0.4.9            tools_4.4.2           yaml_2.3.10          </span></span>
 <span><span class="co">#&gt; [22] data.table_1.16.4     knitr_1.49            htmlwidgets_1.6.4    </span></span>
 <span><span class="co">#&gt; [25] curl_6.1.0            marray_1.84.0         RColorBrewer_1.1-3   </span></span>
@@ -315,17 +315,17 @@ phosphorylation.</p>
 <span><span class="co">#&gt; [52] cachem_1.1.0          splines_4.4.2         parallel_4.4.2       </span></span>
 <span><span class="co">#&gt; [55] BiocManager_1.30.25   base64enc_0.1-3       vctrs_0.6.5          </span></span>
 <span><span class="co">#&gt; [58] boot_1.3-31           Matrix_1.7-1          jsonlite_1.8.9       </span></span>
-<span><span class="co">#&gt; [61] bookdown_0.42         ggrepel_0.9.6         systemfonts_1.1.0    </span></span>
-<span><span class="co">#&gt; [64] limma_3.62.1          plotly_4.10.4         jquerylib_0.1.4      </span></span>
+<span><span class="co">#&gt; [61] bookdown_0.42         ggrepel_0.9.6         systemfonts_1.2.1    </span></span>
+<span><span class="co">#&gt; [64] limma_3.62.2          plotly_4.10.4         jquerylib_0.1.4      </span></span>
 <span><span class="co">#&gt; [67] tidyr_1.3.1           glue_1.8.0            nloptr_2.1.1         </span></span>
 <span><span class="co">#&gt; [70] pkgdown_2.1.1         RJSONIO_1.3-1.9       stringi_1.8.4        </span></span>
 <span><span class="co">#&gt; [73] gtable_0.3.6          lme4_1.1-36           munsell_0.5.1        </span></span>
 <span><span class="co">#&gt; [76] tibble_3.2.1          pillar_1.10.1         htmltools_0.5.8.1    </span></span>
 <span><span class="co">#&gt; [79] gplots_3.2.0          RCy3_2.26.0           graph_1.84.1         </span></span>
-<span><span class="co">#&gt; [82] IRkernel_1.3.2        R6_2.5.1              textshaping_0.4.1    </span></span>
+<span><span class="co">#&gt; [82] IRkernel_1.3.2        R6_2.5.1              textshaping_1.0.0    </span></span>
 <span><span class="co">#&gt; [85] Rdpack_2.6.2          evaluate_1.0.3        lattice_0.22-6       </span></span>
 <span><span class="co">#&gt; [88] rbibutils_2.3         backports_1.5.0       bslib_0.8.0          </span></span>
-<span><span class="co">#&gt; [91] Rcpp_1.0.13-1         uuid_1.2-1            nlme_3.1-166         </span></span>
+<span><span class="co">#&gt; [91] Rcpp_1.0.14           uuid_1.2-1            nlme_3.1-166         </span></span>
 <span><span class="co">#&gt; [94] checkmate_2.3.2       xfun_0.50             fs_1.6.5             </span></span>
 <span><span class="co">#&gt; [97] pkgconfig_2.0.3</span></span></code></pre></div>
 </div>
