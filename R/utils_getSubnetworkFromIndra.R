@@ -36,6 +36,19 @@
     return(res)
 }
 
+#' Call INDRA Cogex API and return response
+#' @param res response from INDRA
+#' @param interaction_types interaction types to filter by
+#' @return filtered list of INDRA statements
+#' @keywords internal
+#' @noRd
+.filterIndraResponse <- function(res, interaction_types) {
+    filtered_response = Filter(
+        function(statement) statement$data$stmt_type %in% interaction_types, 
+        res)
+    return(filtered_response)
+}
+
 #' Filter groupComparison result input based on user-defined cutoffs
 #' @param input groupComparison result
 #' @param pvalueCutoff p-value cutoff

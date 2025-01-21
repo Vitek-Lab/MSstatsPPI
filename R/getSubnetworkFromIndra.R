@@ -9,6 +9,8 @@
 #' name columns
 #' @param pvalueCutoff p-value cutoff for filtering. Default is NULL, i.e. no
 #' filtering
+#' @param interaction_types list of interactions to filter on.  Equivalent to
+#' statement type in INDRA.  Default is c("IncreaseAmount", "DecreaseAmount").
 #'
 #' @return list of 2 data.frames, nodes and edges
 #'
@@ -23,10 +25,13 @@
 #' head(subnetwork$nodes)
 #' head(subnetwork$edges)
 #'
-getSubnetworkFromIndra <- function(input, pvalueCutoff = NULL) {
+getSubnetworkFromIndra <- function(input, 
+                                   pvalueCutoff = NULL, 
+                                   interaction_types = c("IncreaseAmount", "DecreaseAmount")) {
     input <- .filterGetSubnetworkFromIndraInput(input, pvalueCutoff)
     .validateGetSubnetworkFromIndraInput(input)
     res <- .callIndraCogexApi(input$HgncId)
+    res <- .filterIndraResponse(res, interaction_types)
     nodes <- .constructNodesDataFrame(input)
     edges <- .constructEdgesDataFrame(res, input)
     warning(
