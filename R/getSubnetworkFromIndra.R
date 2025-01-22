@@ -9,7 +9,7 @@
 #' name columns
 #' @param pvalueCutoff p-value cutoff for filtering. Default is NULL, i.e. no
 #' filtering
-#' @param interaction_types list of interactions to filter on.  Equivalent to
+#' @param statement_types list of interaction types to filter on.  Equivalent to
 #' statement type in INDRA.  Default is c("IncreaseAmount", "DecreaseAmount").
 #' @param paper_count_cutoff number of papers to filter on. Default is 1.
 #'
@@ -28,12 +28,12 @@
 #'
 getSubnetworkFromIndra <- function(input, 
                                    pvalueCutoff = NULL, 
-                                   interaction_types = c("IncreaseAmount", "DecreaseAmount"),
+                                   statement_types = c("IncreaseAmount", "DecreaseAmount"),
                                    paper_count_cutoff = 1) {
     input <- .filterGetSubnetworkFromIndraInput(input, pvalueCutoff)
     .validateGetSubnetworkFromIndraInput(input)
     res <- .callIndraCogexApi(input$HgncId)
-    res <- .filterIndraResponse(res, interaction_types)
+    res <- .filterIndraResponse(res, statement_types)
     edges <- .constructEdgesDataFrame(res, input)
     edges <- .filterEdgesDataFrame(edges, paper_count_cutoff)
     nodes <- .constructNodesDataFrame(input, edges)

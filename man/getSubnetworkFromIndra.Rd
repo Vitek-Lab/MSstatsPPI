@@ -7,7 +7,7 @@
 getSubnetworkFromIndra(
   input,
   pvalueCutoff = NULL,
-  interaction_types = c("IncreaseAmount", "DecreaseAmount"),
+  statement_types = c("IncreaseAmount", "DecreaseAmount"),
   paper_count_cutoff = 1
 )
 }
@@ -20,7 +20,7 @@ name columns}
 \item{pvalueCutoff}{p-value cutoff for filtering. Default is NULL, i.e. no
 filtering}
 
-\item{interaction_types}{list of interactions to filter on.  Equivalent to
+\item{statement_types}{list of interaction types to filter on.  Equivalent to
 statement type in INDRA.  Default is c("IncreaseAmount", "DecreaseAmount").}
 
 \item{paper_count_cutoff}{number of papers to filter on. Default is 1.}
