@@ -9,6 +9,9 @@
     if (nrow(input) >= 400) {
         stop("Invalid Input Error: INDRA query must contain less than 400 proteins.  Consider lowering your p-value cutoff")
     }
+    if (nrow(input) == 0) {
+        stop("Invalid Input Error: Input must contain at least one protein after filtering.")
+    }
 }
 
 #' Call INDRA Cogex API and return response
@@ -189,6 +192,7 @@
         id = input$Protein,
         logFC = input$log2FC,
         pvalue = input$adj.pvalue,
+        hgncName = if ("HgncName" %in% colnames(input) && is.character(input$HgncName)) input$HgncName else NA,
         stringsAsFactors = FALSE
     )
     nodes <- nodes[which(nodes$id %in% edges$source | nodes$id %in% edges$target),]

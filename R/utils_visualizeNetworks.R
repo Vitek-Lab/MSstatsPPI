@@ -1,8 +1,12 @@
 #' Validate input for MSstatsBioNet visualizeNetworks
 #' @param nodes dataframe of nodes
+#' @param node_label_column column of nodes dataframe for node labeling
 #' @keywords internal
 #' @noRd
-.validateVisualizeNetworks <- function(nodes) {
+.validateVisualizeNetworks <- function(nodes, node_label_column) {
+    if (!node_label_column %in% colnames(nodes)) {
+        stop("The specified node_label_column does not exist in the nodes dataframe.")
+    }
     if (!"logFC" %in% colnames(nodes)) {
         stop("The 'logFC' column is missing from the nodes dataframe.")
     }

@@ -25,7 +25,7 @@
 #'     "extdata/groupComparisonModel.csv",
 #'     package = "MSstatsBioNet"
 #' ))
-#' subnetwork <- getSubnetworkFromIndra(input, pvalueCutoff = 0.05)
+#' subnetwork <- getSubnetworkFromIndra(input)
 #' head(subnetwork$nodes)
 #' head(subnetwork$edges)
 #'
