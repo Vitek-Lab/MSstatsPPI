@@ -136,8 +136,9 @@
             edgeToMetadataMapping[[key]]$data$stmt_type <- unique(c(
                 edgeToMetadataMapping[[key]]$data$stmt_type,
                 edge$data$stmt_type))
+            # This is not completely correct but a good approximation. Need to look at stmt_json -> evidence -> pmid
             edgeToMetadataMapping[[key]]$data$paper_count <- 
-                edgeToMetadataMapping[[key]]$data$paper_count + 1 # this is not completely correct but a good approximation.
+                edgeToMetadataMapping[[key]]$data$paper_count + 1 
             edgeToMetadataMapping[[key]]$data$stmt_json <- 
                 paste0(edgeToMetadataMapping[[key]]$data$stmt_json, edge$data$stmt_json)
         } else {
