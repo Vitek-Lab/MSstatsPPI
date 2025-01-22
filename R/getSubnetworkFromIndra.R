@@ -12,6 +12,9 @@
 #' @param statement_types list of interaction types to filter on.  Equivalent to
 #' statement type in INDRA.  Default is c("IncreaseAmount", "DecreaseAmount").
 #' @param paper_count_cutoff number of papers to filter on. Default is 1.
+#' @param evidence_count_cutoff number of evidence to filter on for each
+#' paper. E.g. A paper may have 5 sentences describing the same interaction vs 1
+#' sentence.  Default is 1.
 #'
 #' @return list of 2 data.frames, nodes and edges
 #'
@@ -29,11 +32,12 @@
 getSubnetworkFromIndra <- function(input, 
                                    pvalueCutoff = NULL, 
                                    statement_types = c("IncreaseAmount", "DecreaseAmount"),
-                                   paper_count_cutoff = 1) {
+                                   paper_count_cutoff = 1,
+                                   evidence_count_cutoff = 1) {
     input <- .filterGetSubnetworkFromIndraInput(input, pvalueCutoff)
     .validateGetSubnetworkFromIndraInput(input)
     res <- .callIndraCogexApi(input$HgncId)
-    res <- .filterIndraResponse(res, statement_types)
+    res <- .filterIndraResponse(res, statement_types, evidence_count_cutoff)
     edges <- .constructEdgesDataFrame(res, input)
     edges <- .filterEdgesDataFrame(edges, paper_count_cutoff)
     nodes <- .constructNodesDataFrame(input, edges)

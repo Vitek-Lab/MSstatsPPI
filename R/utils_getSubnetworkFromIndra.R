@@ -39,13 +39,18 @@
 #' Call INDRA Cogex API and return response
 #' @param res response from INDRA
 #' @param interaction_types interaction types to filter by
+#' @param evidence_count_cutoff number of evidence to filter on for each paper
 #' @return filtered list of INDRA statements
 #' @keywords internal
 #' @noRd
-.filterIndraResponse <- function(res, interaction_types) {
+.filterIndraResponse <- function(res, interaction_types, evidence_count_cutoff) {
     filtered_response = Filter(
         function(statement) statement$data$stmt_type %in% interaction_types, 
         res)
+    filtered_response = Filter(
+        function(statement) statement$data$evidence_count >= evidence_count_cutoff, 
+        filtered_response
+    )
     return(filtered_response)
 }
 

@@ -8,7 +8,8 @@ getSubnetworkFromIndra(
   input,
   pvalueCutoff = NULL,
   statement_types = c("IncreaseAmount", "DecreaseAmount"),
-  paper_count_cutoff = 1
+  paper_count_cutoff = 1,
+  evidence_count_cutoff = 1
 )
 }
 \arguments{
@@ -24,6 +25,10 @@ filtering}
 statement type in INDRA.  Default is c("IncreaseAmount", "DecreaseAmount").}
 
 \item{paper_count_cutoff}{number of papers to filter on. Default is 1.}
+
+\item{evidence_count_cutoff}{number of evidence to filter on for each
+paper. E.g. A paper may have 5 sentences describing the same interaction vs 1
+sentence.  Default is 1.}
 }
 \value{
 list of 2 data.frames, nodes and edges
