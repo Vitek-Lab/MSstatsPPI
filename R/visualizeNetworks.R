@@ -15,6 +15,9 @@
 #' proteins. Default is 0.5
 #' @param node_label_column The column of the nodes dataframe to use as the 
 #' node label.  Default is "id".  "hgncName" can be used for gene name.
+#' @param main_targets character vector of main targets to stand-out with a 
+#' different node shape.  Default is an empty vector c(). IDs of main targets
+#' should match the column used by the node_label_column parameter.
 #' @importFrom RCy3 createNetworkFromDataFrames mapVisualProperty
 #' createVisualStyle setVisualStyle layoutNetwork addAnnotationShape
 #' addAnnotationText getNodePosition getNetworkCenter
@@ -35,7 +38,8 @@
 visualizeNetworks <- function(nodes, edges,
                               pvalueCutoff = 0.05, 
                               logfcCutoff = 0.5,
-                              node_label_column = "id") {
+                              node_label_column = "id",
+                              main_targets = c()) {
     .validateVisualizeNetworks(nodes, node_label_column)
     
     # Add additional columns for visualization
@@ -43,6 +47,7 @@ visualizeNetworks <- function(nodes, edges,
     nodes$logFC_color[nodes$pvalue > pvalueCutoff |
         abs(nodes$logFC) < logfcCutoff] <- 0
     nodes$logFC_abs <- abs(nodes$logFC)
+    nodes$is_main_target <- nodes[,node_label_column] %in% main_targets
 
     # Create network
     if (interactive()) {
@@ -50,7 +55,6 @@ visualizeNetworks <- function(nodes, edges,
 
         # Apply visual style
         DEFAULT_VISUAL_STYLE <- list(
-            NODE_SHAPE = "ROUNDRECT",
             NODE_LABEL_POSITION = "center",
             EDGE_TARGET_ARROW_SHAPE = "Arrow",
             EDGE_LABEL_FONT_SIZE = 6
@@ -58,6 +62,7 @@ visualizeNetworks <- function(nodes, edges,
         VISUAL_STYLE_NAME <- "MSstats-Indra Visual Style"
 
         VISUAL_STYLE_MAPPINGS <- list(
+            mapVisualProperty('Node Shape', 'is_main_target', 'd', c(TRUE, FALSE), c('DIAMOND', 'ROUNDRECT')),
             mapVisualProperty("Node Label", node_label_column, "p"),
             mapVisualProperty(
                 "Node Fill Color", "logFC_color", "c",
