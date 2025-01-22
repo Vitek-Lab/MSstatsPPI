@@ -9,7 +9,8 @@ visualizeNetworks(
   edges,
   pvalueCutoff = 0.05,
   logfcCutoff = 0.5,
-  node_label_column = "id"
+  node_label_column = "id",
+  main_targets = c()
 )
 }
 \arguments{
@@ -28,6 +29,10 @@ proteins. Default is 0.5}
 
 \item{node_label_column}{The column of the nodes dataframe to use as the 
 node label.  Default is "id".  "hgncName" can be used for gene name.}
+
+\item{main_targets}{character vector of main targets to stand-out with a 
+different node shape.  Default is an empty vector c(). IDs of main targets
+should match the column used by the node_label_column parameter.}
 }
 \value{
 cytoscape visualization of subnetwork

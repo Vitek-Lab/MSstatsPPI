@@ -1,14 +1,21 @@
 #' Validate input for MSstatsBioNet visualizeNetworks
 #' @param nodes dataframe of nodes
 #' @param node_label_column column of nodes dataframe for node labeling
+#' @param main_targets vector of nodes serving as main targets
 #' @keywords internal
 #' @noRd
-.validateVisualizeNetworks <- function(nodes, node_label_column) {
+.validateVisualizeNetworks <- function(nodes, node_label_column, main_targets) {
     if (!node_label_column %in% colnames(nodes)) {
         stop("The specified node_label_column does not exist in the nodes dataframe.")
     }
     if (!"logFC" %in% colnames(nodes)) {
         stop("The 'logFC' column is missing from the nodes dataframe.")
+    }
+    if (length(main_targets) > 0 && !is.character(main_targets)) {
+        stop("The main_targets parameter must be a character vector.")
+    }
+    if (!all(main_targets %in% nodes[,node_label_column])) {
+        stop(paste0("Some main_targets do not match any values in the ", node_label_column, " column"))
     }
 }
 

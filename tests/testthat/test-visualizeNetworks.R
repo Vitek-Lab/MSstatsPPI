@@ -42,7 +42,7 @@ test_that("visualizeNetworks works correctly", {
 
     expect_silent(visualizeNetworks(input$nodes, input$edges))
     expect_called(mock_createNetworkFromDataFrames, 1)
-    expect_called(mock_mapVisualProperty, 5)
+    expect_called(mock_mapVisualProperty, 6)
     expect_called(mock_createVisualStyle, 1)
     expect_called(mock_setVisualStyle, 1)
     expect_called(mock_layoutNetwork, 1)
