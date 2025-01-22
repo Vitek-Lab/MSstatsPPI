@@ -8,8 +8,9 @@
 #' corresponding p-values, logFCs, along with additional HGNC ID and HGNC 
 #' name columns
 #' @param protein_level_data output of the \code{\link[MSstats]{dataProcess}} 
-#' function, which contains a list of proteins and their corresponding abundances.  
-#' Used for annotating correlation information and applying correlation cutoffs.
+#' function's ProteinLevelData table, which contains a list of proteins and 
+#' their corresponding abundances.  Used for annotating correlation information 
+#' and applying correlation cutoffs.
 #' @param pvalueCutoff p-value cutoff for filtering. Default is NULL, i.e. no
 #' filtering
 #' @param statement_types list of interaction types to filter on.  Equivalent to

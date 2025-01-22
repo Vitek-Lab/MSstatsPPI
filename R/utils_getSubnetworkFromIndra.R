@@ -183,13 +183,13 @@
     )
     # add correlation - maybe create a separate function
     if (!is.null(protein_level_data)) {
-        protein_level_data <- Filter(function(row) 
-            (row$Protein %in% edges$source | row$Protein %in% edges$target), 
-            protein_level_data)
+        protein_level_data <- protein_level_data[
+            protein_level_data$Protein %in% edges$source | 
+                protein_level_data$Protein %in% edges$target, ]
         wide_data = pivot_wider(protein_level_data[,c("Protein", "LogIntensities", "originalRUN")], names_from = Protein, values_from = LogIntensities)
         wide_data <- wide_data[, -which(names(wide_data) == "originalRUN")]
         correlations = cor(wide_data, use = "pairwise.complete.obs")
-        edges$correlation = lapply(function(edge) correlations[edge$source, edge$target], edges)
+        edges$correlation = apply(edges, 1, function(edge) correlations[edge["source"], edge["target"]])
     }
     return(edges)
 }

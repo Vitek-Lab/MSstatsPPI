@@ -21,8 +21,9 @@ corresponding p-values, logFCs, along with additional HGNC ID and HGNC
 name columns}
 
 \item{protein_level_data}{output of the \code{\link[MSstats]{dataProcess}} 
-function, which contains a list of proteins and their corresponding abundances.  
-Used for annotating correlation information and applying correlation cutoffs.}
+function's ProteinLevelData table, which contains a list of proteins and 
+their corresponding abundances.  Used for annotating correlation information 
+and applying correlation cutoffs.}
 
 \item{pvalueCutoff}{p-value cutoff for filtering. Default is NULL, i.e. no
 filtering}
