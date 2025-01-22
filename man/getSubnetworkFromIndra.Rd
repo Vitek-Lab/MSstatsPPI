@@ -6,10 +6,12 @@
 \usage{
 getSubnetworkFromIndra(
   input,
+  protein_level_data = NULL,
   pvalueCutoff = NULL,
   statement_types = c("IncreaseAmount", "DecreaseAmount"),
   paper_count_cutoff = 1,
-  evidence_count_cutoff = 1
+  evidence_count_cutoff = 1,
+  correlation_cutoff = 0.3
 )
 }
 \arguments{
@@ -17,6 +19,10 @@ getSubnetworkFromIndra(
 comparisionResult table, which contains a list of proteins and their 
 corresponding p-values, logFCs, along with additional HGNC ID and HGNC 
 name columns}
+
+\item{protein_level_data}{output of the \code{\link[MSstats]{dataProcess}} 
+function, which contains a list of proteins and their corresponding abundances.  
+Used for annotating correlation information and applying correlation cutoffs.}
 
 \item{pvalueCutoff}{p-value cutoff for filtering. Default is NULL, i.e. no
 filtering}
@@ -29,6 +35,10 @@ statement type in INDRA.  Default is c("IncreaseAmount", "DecreaseAmount").}
 \item{evidence_count_cutoff}{number of evidence to filter on for each
 paper. E.g. A paper may have 5 sentences describing the same interaction vs 1
 sentence.  Default is 1.}
+
+\item{correlation_cutoff}{if protein_level_abundance is not NULL, apply a 
+cutoff for edges with correlation less than a specified cutoff.  Default is
+0.3}
 }
 \value{
 list of 2 data.frames, nodes and edges

@@ -21,7 +21,8 @@ Imports:
     httr,
     jsonlite,
     r2r,
-    MSstats
+    MSstats,
+    tidyr
 Suggests: 
     data.table,
     BiocStyle,

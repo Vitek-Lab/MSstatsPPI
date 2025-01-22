@@ -151,11 +151,14 @@
 #' Construct edges data.frame from INDRA response
 #' @param res INDRA response
 #' @param input filtered groupComparison result
+#' @param protein_level_data output of dataProcess
 #' @importFrom r2r query keys
+#' @importFrom MSstats quantification
+#' @importFrom tidyr pivot_wider
 #' @return edge data.frame
 #' @keywords internal
 #' @noRd
-.constructEdgesDataFrame <- function(res, input) {
+.constructEdgesDataFrame <- function(res, input, protein_level_data) {
     res <- .collapseDuplicateEdgesIntoEdgeToMetadataMapping(res, input)
     edges <- data.frame(
         source = vapply(keys(res), function(x) {
@@ -178,6 +181,17 @@
         }, ""),
         stringsAsFactors = FALSE
     )
+    # add correlation - maybe create a separate function
+    if (!is.null(protein_level_data)) {
+        protein_level_data <- Filter(function(row) 
+            (row$Protein %in% edges$source | row$Protein %in% edges$target), 
+            protein_level_data)
+        long_format <-  MSstats::quantification(protein_level_data, format="long")
+        wide_data <- pivot_wider(long_format, names_from = Protein, values_from = LogIntensity) # This should be in the MSstats quantification function
+        wide_data <- wide_data[, -which(names(wide_data) == "Group_Subject")]
+        correlations = cor(wide_data, use = "pairwise.complete.obs")
+        edges$correlation = lapply(function(edge) correlations[edge$source, edge$target], edges)
+    }
     return(edges)
 }
 
@@ -202,10 +216,17 @@
 #' Filter Edges Data Frame
 #' @param edges response from INDRA
 #' @param paper_count_cutoff cutoff for number of papers
+#' @param correlation_cutoff if protein_level_abundance is not NULL, apply a 
+#' cutoff for edges with correlation less than a specified cutoff.
 #' @return filtered edges data frame
 #' @keywords internal
 #' @noRd
-.filterEdgesDataFrame <- function(edges, paper_count_cutoff) {
-    edges = edges[which(edges$paperCount >= paper_count_cutoff), ]
+.filterEdgesDataFrame <- function(edges, 
+                                  paper_count_cutoff,
+                                  correlation_cutoff) {
+    edges <- edges[which(edges$paperCount >= paper_count_cutoff), ]
+    if ("correlation" %in% colnames(edges)) {
+        edges <- edges[which(abs(edges$correlation) >= correlation_cutoff), ]
+    }
     return(edges)
 }
