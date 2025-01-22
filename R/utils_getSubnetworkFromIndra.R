@@ -36,6 +36,24 @@
     return(res)
 }
 
+#' Call INDRA Cogex API and return response
+#' @param res response from INDRA
+#' @param interaction_types interaction types to filter by
+#' @param evidence_count_cutoff number of evidence to filter on for each paper
+#' @return filtered list of INDRA statements
+#' @keywords internal
+#' @noRd
+.filterIndraResponse <- function(res, interaction_types, evidence_count_cutoff) {
+    filtered_response = Filter(
+        function(statement) statement$data$stmt_type %in% interaction_types, 
+        res)
+    filtered_response = Filter(
+        function(statement) statement$data$evidence_count >= evidence_count_cutoff, 
+        filtered_response
+    )
+    return(filtered_response)
+}
+
 #' Filter groupComparison result input based on user-defined cutoffs
 #' @param input groupComparison result
 #' @param pvalueCutoff p-value cutoff
@@ -106,8 +124,14 @@
             edgeToMetadataMapping[[key]]$data$stmt_type <- unique(c(
                 edgeToMetadataMapping[[key]]$data$stmt_type,
                 edge$data$stmt_type))
+            edgeToMetadataMapping[[key]]$data$stmt_type <- unique(c(
+                edgeToMetadataMapping[[key]]$data$stmt_type,
+                edge$data$stmt_type))
+            edgeToMetadataMapping[[key]]$data$paper_count <- 
+                edgeToMetadataMapping[[key]]$data$paper_count + 1
         } else {
             edge <- .addAdditionalMetadataToIndraEdge(edge, input)
+            edge$data$paper_count <- 1
             edgeToMetadataMapping[[key]] <- edge
         }
     }
@@ -143,6 +167,9 @@
         evidenceCount = vapply(keys(res), function(x) {
             query(res, x)$data$evidence_count
         }, 1),
+        paperCount = vapply(keys(res), function(x) {
+            query(res, x)$data$paper_count
+        }, 1),
         evidenceLink = vapply(keys(res), function(x) {
             query(res, x)$evidence_list
         }, ""),
@@ -153,15 +180,28 @@
 
 #' Construct nodes data.frame from groupComparison output
 #' @param input filtered groupComparison result
+#' @param edges edges data frame
 #' @return nodes data.frame
 #' @keywords internal
 #' @noRd
-.constructNodesDataFrame <- function(input) {
+.constructNodesDataFrame <- function(input, edges) {
     nodes <- data.frame(
         id = input$Protein,
         logFC = input$log2FC,
         pvalue = input$adj.pvalue,
         stringsAsFactors = FALSE
     )
+    nodes <- nodes[which(nodes$id %in% edges$source | nodes$id %in% edges$target),]
     return(nodes)
+}
+
+#' Filter Edges Data Frame
+#' @param edges response from INDRA
+#' @param paper_count_cutoff cutoff for number of papers
+#' @return filtered edges data frame
+#' @keywords internal
+#' @noRd
+.filterEdgesDataFrame <- function(edges, paper_count_cutoff) {
+    edges = edges[which(edges$paperCount >= paper_count_cutoff), ]
+    return(edges)
 }

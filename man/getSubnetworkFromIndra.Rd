@@ -4,7 +4,13 @@
 \alias{getSubnetworkFromIndra}
 \title{Get subnetwork from INDRA database}
 \usage{
-getSubnetworkFromIndra(input, pvalueCutoff = NULL)
+getSubnetworkFromIndra(
+  input,
+  pvalueCutoff = NULL,
+  statement_types = c("IncreaseAmount", "DecreaseAmount"),
+  paper_count_cutoff = 1,
+  evidence_count_cutoff = 1
+)
 }
 \arguments{
 \item{input}{output of \code{\link[MSstats]{groupComparison}} function's 
@@ -14,6 +20,15 @@ name columns}
 
 \item{pvalueCutoff}{p-value cutoff for filtering. Default is NULL, i.e. no
 filtering}
+
+\item{statement_types}{list of interaction types to filter on.  Equivalent to
+statement type in INDRA.  Default is c("IncreaseAmount", "DecreaseAmount").}
+
+\item{paper_count_cutoff}{number of papers to filter on. Default is 1.}
+
+\item{evidence_count_cutoff}{number of evidence to filter on for each
+paper. E.g. A paper may have 5 sentences describing the same interaction vs 1
+sentence.  Default is 1.}
 }
 \value{
 list of 2 data.frames, nodes and edges
