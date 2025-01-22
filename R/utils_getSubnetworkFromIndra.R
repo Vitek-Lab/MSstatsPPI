@@ -189,7 +189,7 @@
         id = input$Protein,
         logFC = input$log2FC,
         pvalue = input$adj.pvalue,
-        hgncName = if ("HgncName" %in% colnames(input)) input$HgncName else NA,
+        hgncName = if ("HgncName" %in% colnames(input) && is.character(input$HgncName)) input$HgncName else NA,
         stringsAsFactors = FALSE
     )
     nodes <- nodes[which(nodes$id %in% edges$source | nodes$id %in% edges$target),]
