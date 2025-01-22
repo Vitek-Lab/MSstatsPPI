@@ -1,8 +1,9 @@
 #' Validate input for MSstatsBioNet getSubnetworkFromIndra
 #' @param input dataframe from MSstats groupComparison output
+#' @param protein_level_data dataframe from MSstats dataProcess output
 #' @keywords internal
 #' @noRd
-.validateGetSubnetworkFromIndraInput <- function(input) {
+.validateGetSubnetworkFromIndraInput <- function(input, protein_level_data) {
     if (!"HgncId" %in% colnames(input)) {
         stop("Invalid Input Error: Input must contain a column named 'HgncId'.")
     }
@@ -11,6 +12,11 @@
     }
     if (nrow(input) == 0) {
         stop("Invalid Input Error: Input must contain at least one protein after filtering.")
+    }
+    if (!is.null(protein_level_data)) {
+        if(!all(c("Protein", "LogIntensities", "originalRUN") %in% colnames(protein_level_data))) {
+            stop("protein_level_data must contain 'Protein', 'LogIntensities', and 'originalRUN' columns.")
+        }
     }
 }
 
@@ -186,10 +192,19 @@
         protein_level_data <- protein_level_data[
             protein_level_data$Protein %in% edges$source | 
                 protein_level_data$Protein %in% edges$target, ]
-        wide_data = pivot_wider(protein_level_data[,c("Protein", "LogIntensities", "originalRUN")], names_from = Protein, values_from = LogIntensities)
+        wide_data <- pivot_wider(protein_level_data[,c("Protein", "LogIntensities", "originalRUN")], names_from = Protein, values_from = LogIntensities)
         wide_data <- wide_data[, -which(names(wide_data) == "originalRUN")]
-        correlations = cor(wide_data, use = "pairwise.complete.obs")
-        edges$correlation = apply(edges, 1, function(edge) correlations[edge["source"], edge["target"]])
+        if (any(colSums(!is.na(wide_data)) == 0)) {
+            warning("protein_level_data contains proteins with all missing values, unable to calculate correlations for those proteins.")
+        }
+        correlations <- cor(wide_data, use = "pairwise.complete.obs")
+        edges$correlation <- apply(edges, 1, function(edge) {
+            if (edge["source"] %in% rownames(correlations) && edge["target"] %in% colnames(correlations)) {
+                return(correlations[edge["source"], edge["target"]])
+            } else {
+                return(NA)
+            }
+        })
     }
     return(edges)
 }
@@ -226,6 +241,9 @@
     edges <- edges[which(edges$paperCount >= paper_count_cutoff), ]
     if ("correlation" %in% colnames(edges)) {
         edges <- edges[which(abs(edges$correlation) >= correlation_cutoff), ]
+    }
+    if (nrow(edges) == 0) {
+        stop("No edges remain after applying filters. Consider relaxing filters")
     }
     return(edges)
 }
