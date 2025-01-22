@@ -40,7 +40,7 @@ visualizeNetworks <- function(nodes, edges,
                               logfcCutoff = 0.5,
                               node_label_column = "id",
                               main_targets = c()) {
-    .validateVisualizeNetworks(nodes, node_label_column)
+    .validateVisualizeNetworks(nodes, node_label_column, main_targets)
     
     # Add additional columns for visualization
     nodes$logFC_color <- nodes$logFC
