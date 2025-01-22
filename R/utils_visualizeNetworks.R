@@ -11,7 +11,7 @@
     if (!"logFC" %in% colnames(nodes)) {
         stop("The 'logFC' column is missing from the nodes dataframe.")
     }
-    if (!is.character(main_targets)) {
+    if (length(main_targets) > 0 && !is.character(main_targets)) {
         stop("The main_targets parameter must be a character vector.")
     }
     if (!all(main_targets %in% nodes[,node_label_column])) {
