@@ -4,7 +4,13 @@
 \alias{visualizeNetworks}
 \title{Create visualization of network}
 \usage{
-visualizeNetworks(nodes, edges, pvalueCutoff = 0.05, logfcCutoff = 0.5)
+visualizeNetworks(
+  nodes,
+  edges,
+  pvalueCutoff = 0.05,
+  logfcCutoff = 0.5,
+  node_label_column = "id"
+)
 }
 \arguments{
 \item{nodes}{dataframe of nodes consisting of columns
@@ -19,6 +25,9 @@ Default is 0.05}
 
 \item{logfcCutoff}{log fold change cutoff for coloring significant
 proteins. Default is 0.5}
+
+\item{node_label_column}{The column of the nodes dataframe to use as the 
+node label.  Default is "id".  "hgncName" can be used for gene name.}
 }
 \value{
 cytoscape visualization of subnetwork

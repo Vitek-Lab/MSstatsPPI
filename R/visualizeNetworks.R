@@ -13,6 +13,8 @@
 #' Default is 0.05
 #' @param logfcCutoff log fold change cutoff for coloring significant
 #' proteins. Default is 0.5
+#' @param node_label_column The column of the nodes dataframe to use as the 
+#' node label.  Default is "id".  "hgncName" can be used for gene name.
 #' @importFrom RCy3 createNetworkFromDataFrames mapVisualProperty
 #' createVisualStyle setVisualStyle layoutNetwork addAnnotationShape
 #' addAnnotationText getNodePosition getNetworkCenter
@@ -32,7 +34,8 @@
 #'
 visualizeNetworks <- function(nodes, edges,
                               pvalueCutoff = 0.05, 
-                              logfcCutoff = 0.5) {
+                              logfcCutoff = 0.5,
+                              node_label_column = "id") {
     .validateVisualizeNetworks(nodes)
     
     # Add additional columns for visualization
@@ -55,7 +58,7 @@ visualizeNetworks <- function(nodes, edges,
         VISUAL_STYLE_NAME <- "MSstats-Indra Visual Style"
 
         VISUAL_STYLE_MAPPINGS <- list(
-            mapVisualProperty("Node Label", "id", "p"),
+            mapVisualProperty("Node Label", node_label_column, "p"),
             mapVisualProperty(
                 "Node Fill Color", "logFC_color", "c",
                 c(-logfcCutoff, 0.0, logfcCutoff),
