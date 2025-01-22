@@ -243,7 +243,7 @@
         edges <- edges[which(abs(edges$correlation) >= correlation_cutoff), ]
     }
     if (nrow(edges) == 0) {
-        stop("No edges remain after applying filters. Consider relaxing filters")
+        warning("No edges remain after applying filters. Consider relaxing filters")
     }
     return(edges)
 }
