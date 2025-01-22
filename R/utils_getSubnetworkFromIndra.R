@@ -138,6 +138,8 @@
                 edge$data$stmt_type))
             edgeToMetadataMapping[[key]]$data$paper_count <- 
                 edgeToMetadataMapping[[key]]$data$paper_count + 1
+            edgeToMetadataMapping[[key]]$data$stmt_json <- 
+                paste0(edgeToMetadataMapping[[key]]$data$stmt_json, edge$data$stmt_json)
         } else {
             edge <- .addAdditionalMetadataToIndraEdge(edge, input)
             edge$data$paper_count <- 1
@@ -184,6 +186,9 @@
         }, 1),
         evidenceLink = vapply(keys(res), function(x) {
             query(res, x)$evidence_list
+        }, ""),
+        stmtJson = vapply(keys(res), function(x) {
+            query(res, x)$data$stmt_json
         }, ""),
         stringsAsFactors = FALSE
     )
