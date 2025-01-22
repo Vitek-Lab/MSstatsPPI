@@ -186,9 +186,8 @@
         protein_level_data <- Filter(function(row) 
             (row$Protein %in% edges$source | row$Protein %in% edges$target), 
             protein_level_data)
-        long_format <-  MSstats::quantification(protein_level_data, format="long")
-        wide_data <- pivot_wider(long_format, names_from = Protein, values_from = LogIntensity) # This should be in the MSstats quantification function
-        wide_data <- wide_data[, -which(names(wide_data) == "Group_Subject")]
+        wide_data = pivot_wider(protein_level_data[,c("Protein", "LogIntensities", "originalRUN")], names_from = Protein, values_from = LogIntensities)
+        wide_data <- wide_data[, -which(names(wide_data) == "originalRUN")]
         correlations = cor(wide_data, use = "pairwise.complete.obs")
         edges$correlation = lapply(function(edge) correlations[edge$source, edge$target], edges)
     }
