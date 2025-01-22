@@ -44,10 +44,12 @@ a subnetwork of protein interactions from INDRA database.</p>
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">getSubnetworkFromIndra</span><span class="op">(</span></span>
 <span>  <span class="va">input</span>,</span>
+<span>  protein_level_data <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  pvalueCutoff <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  statement_types <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"IncreaseAmount"</span>, <span class="st">"DecreaseAmount"</span><span class="op">)</span>,</span>
 <span>  paper_count_cutoff <span class="op">=</span> <span class="fl">1</span>,</span>
-<span>  evidence_count_cutoff <span class="op">=</span> <span class="fl">1</span></span>
+<span>  evidence_count_cutoff <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>  correlation_cutoff <span class="op">=</span> <span class="fl">0.3</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -60,6 +62,13 @@ a subnetwork of protein interactions from INDRA database.</p>
 comparisionResult table, which contains a list of proteins and their
 corresponding p-values, logFCs, along with additional HGNC ID and HGNC
 name columns</p></dd>
+
+
+<dt id="arg-protein-level-data">protein_level_data<a class="anchor" aria-label="anchor" href="#arg-protein-level-data"></a></dt>
+<dd><p>output of the <code><a href="https://rdrr.io/pkg/MSstats/man/dataProcess.html" class="external-link">dataProcess</a></code>
+function's ProteinLevelData table, which contains a list of proteins and
+their corresponding abundances.  Used for annotating correlation information
+and applying correlation cutoffs.</p></dd>
 
 
 <dt id="arg-pvaluecutoff">pvalueCutoff<a class="anchor" aria-label="anchor" href="#arg-pvaluecutoff"></a></dt>
@@ -81,6 +90,12 @@ statement type in INDRA.  Default is c("IncreaseAmount", "DecreaseAmount").</p><
 paper. E.g. A paper may have 5 sentences describing the same interaction vs 1
 sentence.  Default is 1.</p></dd>
 
+
+<dt id="arg-correlation-cutoff">correlation_cutoff<a class="anchor" aria-label="anchor" href="#arg-correlation-cutoff"></a></dt>
+<dd><p>if protein_level_abundance is not NULL, apply a
+cutoff for edges with correlation less than a specified cutoff.  Default is
+0.3</p></dd>
+
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
@@ -94,6 +109,7 @@ sentence.  Default is 1.</p></dd>
 <span class="r-in"><span>    package <span class="op">=</span> <span class="st">"MSstatsBioNet"</span></span></span>
 <span class="r-in"><span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">subnetwork</span> <span class="op">&lt;-</span> <span class="fu">getSubnetworkFromIndra</span><span class="op">(</span><span class="va">input</span><span class="op">)</span></span></span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>No edges remain after applying filters. Consider relaxing filters</span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>NOTICE: This function includes third-party software components</span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span>         that are licensed under the BSD 2-Clause License. Please ensure to</span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span>         include the third-party licensing agreements if redistributing this</span>
