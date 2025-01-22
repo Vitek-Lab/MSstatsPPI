@@ -9,6 +9,9 @@
     if (nrow(input) >= 400) {
         stop("Invalid Input Error: INDRA query must contain less than 400 proteins.  Consider lowering your p-value cutoff")
     }
+    if (nrow(input) == 0) {
+        stop("Invalid Input Error: Input must contain at least one protein after filtering.")
+    }
 }
 
 #' Call INDRA Cogex API and return response
