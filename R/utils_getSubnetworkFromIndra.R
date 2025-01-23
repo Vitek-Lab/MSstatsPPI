@@ -244,10 +244,12 @@
 #' Construct correlation matrix from MSstats
 #' @param protein_level_data output of dataProcess
 #' @importFrom tidyr pivot_wider
+#' @importFrom stats cor
 #' @return correlations matrix
 #' @keywords internal
 #' @noRd
 .getCorrelationMatrixFromProteinLevelData <- function(protein_level_data) {
+    Protein = LogIntensities = NULL
     wide_data <- pivot_wider(protein_level_data[,c("Protein", "LogIntensities", "originalRUN")], names_from = Protein, values_from = LogIntensities)
     wide_data <- wide_data[, -which(names(wide_data) == "originalRUN")]
     if (any(colSums(!is.na(wide_data)) == 0)) {
