@@ -159,8 +159,6 @@
 #' @param input filtered groupComparison result
 #' @param protein_level_data output of dataProcess
 #' @importFrom r2r query keys
-#' @importFrom MSstats quantification
-#' @importFrom tidyr pivot_wider
 #' @return edge data.frame
 #' @keywords internal
 #' @noRd
@@ -192,12 +190,7 @@
         protein_level_data <- protein_level_data[
             protein_level_data$Protein %in% edges$source | 
                 protein_level_data$Protein %in% edges$target, ]
-        wide_data <- pivot_wider(protein_level_data[,c("Protein", "LogIntensities", "originalRUN")], names_from = Protein, values_from = LogIntensities)
-        wide_data <- wide_data[, -which(names(wide_data) == "originalRUN")]
-        if (any(colSums(!is.na(wide_data)) == 0)) {
-            warning("protein_level_data contains proteins with all missing values, unable to calculate correlations for those proteins.")
-        }
-        correlations <- cor(wide_data, use = "pairwise.complete.obs")
+        correlations <- .getCorrelationMatrixFromProteinLevelData(protein_level_data)
         edges$correlation <- apply(edges, 1, function(edge) {
             if (edge["source"] %in% rownames(correlations) && edge["target"] %in% colnames(correlations)) {
                 return(correlations[edge["source"], edge["target"]])
@@ -246,4 +239,22 @@
         warning("No edges remain after applying filters. Consider relaxing filters")
     }
     return(edges)
+}
+
+#' Construct correlation matrix from MSstats
+#' @param protein_level_data output of dataProcess
+#' @importFrom tidyr pivot_wider
+#' @importFrom stats cor
+#' @return correlations matrix
+#' @keywords internal
+#' @noRd
+.getCorrelationMatrixFromProteinLevelData <- function(protein_level_data) {
+    Protein = LogIntensities = NULL
+    wide_data <- pivot_wider(protein_level_data[,c("Protein", "LogIntensities", "originalRUN")], names_from = Protein, values_from = LogIntensities)
+    wide_data <- wide_data[, -which(names(wide_data) == "originalRUN")]
+    if (any(colSums(!is.na(wide_data)) == 0)) {
+        warning("protein_level_data contains proteins with all missing values, unable to calculate correlations for those proteins.")
+    }
+    correlations <- cor(wide_data, use = "pairwise.complete.obs")
+    return(correlations)
 }
