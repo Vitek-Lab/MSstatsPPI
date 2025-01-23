@@ -3,7 +3,6 @@
 export(annotateProteinInfoFromIndra)
 export(getSubnetworkFromIndra)
 export(visualizeNetworks)
-importFrom(MSstats,quantification)
 importFrom(RCy3,addAnnotationShape)
 importFrom(RCy3,addAnnotationText)
 importFrom(RCy3,createNetworkFromDataFrames)
