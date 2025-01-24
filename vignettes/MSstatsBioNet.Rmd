@@ -39,35 +39,20 @@ networks. The package is designed to be used in conjunction with the
 
 # Dataset
 
+We will be taking a subset of the dataset found in this [paper](https://pmc.ncbi.nlm.nih.gov/articles/PMC7331093/).  
+
 ```{r}
-# This one is more interesting:
-# https://drive.google.com/drive/u/0/folders/10DKu98fFXBQcaku2UaSpsF03hhFh5r5L
-# Reference: https://pmc.ncbi.nlm.nih.gov/articles/PMC7331093/
-model = data.table::fread("proteome_model.csv")
-model <- model %>%
-    mutate(Protein = str_extract(Protein, "[^|]+$"))
-model <- model %>% filter(adj.pvalue < 0.000000000000000000000000000000001)
-annotated_df = annotateProteinInfoFromIndra(model, "Uniprot_Mnemonic")
-subnetwork = getSubnetworkFromIndra(annotated_df, paper_count_cutoff = 2, evidence_count_cutoff = 2)
-visualizeNetworks(subnetwork$nodes, subnetwork$edges)
+input = data.table::fread(system.file(
+    "extdata/msstats.csv",
+    package = "MSstatsBioNet"
+))
 ```
 
 # MSstats Convert from Upstream Dataset
 
 ```{r}
 library(MSstatsConvert)
-input <- system.file("tinytest/raw_data/Metamorpheus/AllQuantifiedPeaks.tsv",
-    package = "MSstatsConvert"
-)
-input <- data.table::fread(input)
-annot <- system.file("tinytest/raw_data/Metamorpheus/Annotation.tsv",
-    package = "MSstatsConvert"
-)
-annot <- data.table::fread(annot)
-msstats_imported <- MetamorpheusToMSstatsFormat(input,
-    annotation = annot,
-    use_log_file = FALSE
-)
+msstats_imported = FragPipetoMSstatsFormat(input, use_log_file = FALSE)
 head(msstats_imported)
 ```
 
@@ -83,11 +68,12 @@ information.
 ```{r}
 library(MSstats)
 QuantData <- dataProcess(msstats_imported, use_log_file = FALSE)
-groupComparisonResult <- groupComparison(
+model <- groupComparison(
     contrast.matrix = "pairwise",
     data = QuantData,
     use_log_file = FALSE
 )
+head(model$ComparisonResult)
 ```
 
 Next, we will preprocess the data using the `dataProcess` function and perform
@@ -101,27 +87,16 @@ proteins with their associated p-values and log fold changes.
 
 First, we need to convert the group comparison results to a format that can be
 processed by INDRA.  The `getSubnetworkFromIndra` function requires a table 
-containing HGNC IDs.  We can use the following mapping to convert from Uniprot
-to HGNC ID.  This mapping was obtained from this 
-[Python uniprot client](https://indra.readthedocs.io/en/docstrings/modules/databases/index.html#indra.databases.hgnc_client.get_hgnc_id)
+containing HGNC IDs.  We can use the `annotateProteinInfoFromIndra` function
+to obtain these mappings.
 
-In the future, this uniprot client will be added as a separate function to allow
-users to perform this conversion in R in a streamlined way.
+In the below example, we convert uniprot IDs to their corresponding Hgnc IDs. We
+can also extract other information, such as hgnc gene name and protein function.
 
 ```{r}
 library(MSstatsBioNet)
-uniprot_to_hgnc_mapping <- c(
-    "B9A064" = "38476",
-    "O00391" = "9756",
-    "O14818" = "9536",
-    "O43598" = "21218",
-    "O43707" = "166",
-    "P16050" = "11390",
-    "P84243" = "4765"
-)
-groupComparisonResult$ComparisonResult$HgncId <- uniprot_to_hgnc_mapping[
-    groupComparisonResult$ComparisonResult$Protein
-]
+annotated_df = annotateProteinInfoFromIndra(model$ComparisonResult, "Uniprot")
+head(annotated_df)
 ```
 
 ## Subnetwork Query
@@ -131,7 +106,9 @@ subnetwork of proteins from the INDRA database based on differential abundance
 analysis results.  
 
 ```{r}
-subnetwork <- getSubnetworkFromIndra(groupComparisonResult$ComparisonResult)
+subnetwork <- getSubnetworkFromIndra(annotated_df, pvalueCutoff = 0.05)
+head(subnetwork$nodes)
+head(subnetwork$edges)
 ```
 
 This package is distributed under the [Artistic-2.0](https://opensource.org/licenses/Artistic-2.0) license.  However, its dependencies may have different licenses.  In this example, getSubnetworkFromIndra depends on INDRA, which is distributed under the [BSD 2-Clause](https://opensource.org/license/bsd-2-clause) license.  Furthermore, INDRA's knowledge sources may have different licenses for commercial applications.  Please refer to the [INDRA README](https://github.com/sorgerlab/indra?tab=readme-ov-file#indra-modules) for more information on its knowledge sources and their associated licenses.
