@@ -1,3 +1,5 @@
+INDRA_API_URL = "https://discovery.indra.bio"
+
 #' Call API to get UniProt IDs from UniProt mnemonic IDs
 #' @param uniprotMnemonicIds list of UniProt mnemonic ids
 #' @return list of UniProt IDs
@@ -33,7 +35,7 @@
         stop("An error occurred converting uniprot mnemonic IDs to character strings: ", e$message)
     })
 
-    apiUrl <- file.path(Sys.getenv("INDRA_API_URL"), "api/get_uniprot_ids_from_uniprot_mnemonic_ids")
+    apiUrl <- file.path(INDRA_API_URL, "api/get_uniprot_ids_from_uniprot_mnemonic_ids")
 
     requestBody <- list(uniprot_mnemonic_ids = uniprotMnemonicIds)
     requestBody <- jsonlite::toJSON(requestBody, auto_unbox = TRUE)
@@ -73,7 +75,7 @@
         stop("Input list must not be empty.")
     }
 
-    apiUrl <- file.path(Sys.getenv("INDRA_API_URL"), "api/get_hgnc_ids_from_uniprot_ids")
+    apiUrl <- file.path(INDRA_API_URL, "api/get_hgnc_ids_from_uniprot_ids")
 
     requestBody <- list(uniprot_ids = uniprotIds)
     requestBody <- jsonlite::toJSON(requestBody, auto_unbox = TRUE)
@@ -113,7 +115,7 @@
         stop("Input list must not be empty.")
     }
 
-    apiUrl <- file.path(Sys.getenv("INDRA_API_URL"), "api/get_hgnc_names_from_hgnc_ids")
+    apiUrl <- file.path(INDRA_API_URL, "api/get_hgnc_names_from_hgnc_ids")
 
     requestBody <- list(hgnc_ids = hgncIds)
     requestBody <- jsonlite::toJSON(requestBody, auto_unbox = TRUE)
@@ -153,7 +155,7 @@
         stop("Input list must not be empty.")
     }
 
-    apiUrl <- file.path(Sys.getenv("INDRA_API_URL"), "api/is_kinase")
+    apiUrl <- file.path(INDRA_API_URL, "api/is_kinase")
 
     requestBody <- list(genes = genes)
     requestBody <- jsonlite::toJSON(requestBody, auto_unbox = TRUE)
@@ -193,7 +195,7 @@
         stop("Input list must not be empty.")
     }
 
-    apiUrl <- file.path(Sys.getenv("INDRA_API_URL"), "api/is_phosphatase")
+    apiUrl <- file.path(INDRA_API_URL, "api/is_phosphatase")
 
     requestBody <- list(genes = genes)
     requestBody <- jsonlite::toJSON(requestBody, auto_unbox = TRUE)
@@ -233,7 +235,7 @@
         stop("Input list must not be empty.")
     }
 
-    apiUrl <- file.path(Sys.getenv("INDRA_API_URL"), "api/is_transcription_factor")
+    apiUrl <- file.path(INDRA_API_URL, "api/is_transcription_factor")
 
     requestBody <- list(genes = genes)
     requestBody <- jsonlite::toJSON(requestBody, auto_unbox = TRUE)
