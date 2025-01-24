@@ -37,6 +37,20 @@ statistical analysis results in the context of protein-protein interaction
 networks. The package is designed to be used in conjunction with the 
 `MSstats` package.
 
+# Dataset
+
+```{r}
+# This one is more interesting:
+# https://drive.google.com/drive/u/0/folders/10DKu98fFXBQcaku2UaSpsF03hhFh5r5L
+model = data.table::fread("proteome_model.csv")
+model <- model %>%
+    mutate(Protein = str_extract(Protein, "[^|]+$"))
+model <- model %>% filter(adj.pvalue < 0.000000000000000000000000000000001)
+annotated_df = annotateProteinInfoFromIndra(model, "Uniprot_Mnemonic")
+subnetwork = getSubnetworkFromIndra(annotated_df, paper_count_cutoff = 2, evidence_count_cutoff = 2)
+visualizeNetworks(subnetwork$nodes, subnetwork$edges)
+```
+
 # MSstats Convert from Upstream Dataset
 
 ```{r}
