@@ -57,7 +57,7 @@ annotateProteinInfoFromIndra <- function(df, proteinIdType) {
 .populateUniprotIdsInDataFrame <- function(df, proteinIdType) {
         df$UniprotId <- NA
         if (proteinIdType == "Uniprot") {
-                df$UniprotId <- df$Protein
+                df$UniprotId <- as.character(df$Protein)
         }
         
         if (proteinIdType == "Uniprot_Mnemonic") {
