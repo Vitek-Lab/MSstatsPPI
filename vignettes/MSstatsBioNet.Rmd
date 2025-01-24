@@ -42,6 +42,7 @@ networks. The package is designed to be used in conjunction with the
 ```{r}
 # This one is more interesting:
 # https://drive.google.com/drive/u/0/folders/10DKu98fFXBQcaku2UaSpsF03hhFh5r5L
+# Reference: https://pmc.ncbi.nlm.nih.gov/articles/PMC7331093/
 model = data.table::fread("proteome_model.csv")
 model <- model %>%
     mutate(Protein = str_extract(Protein, "[^|]+$"))
