@@ -10,7 +10,7 @@ test_that("getSubnetworkFromIndra works correctly", {
     expect_equal(nrow(subnetwork$edges), 2)
 })
 
-test_that("getSubnetworkFromIndra with pvalue filter works correctly", {
+test_that("getSubnetworkFromIndra with different statement type works correctly", {
     input <- data.table::fread(
         system.file("extdata/groupComparisonModel.csv", package = "MSstatsBioNet")
     )
@@ -18,11 +18,10 @@ test_that("getSubnetworkFromIndra with pvalue filter works correctly", {
         return(readRDS(system.file("extdata/indraResponse.rds", package = "MSstatsBioNet")))
     })
     suppressWarnings(
-        subnetwork <- getSubnetworkFromIndra(input, pvalueCutoff = 0.02, statement_types = c("Complex"))
+        subnetwork <- getSubnetworkFromIndra(input, statement_types = c("Complex"))
     )
-    # TODO: Adjust test file to reflect p-value filtering
-    expect_equal(nrow(subnetwork$nodes), 5)
-    expect_equal(nrow(subnetwork$edges), 8)
+    expect_equal(nrow(subnetwork$nodes), 8)
+    expect_equal(nrow(subnetwork$edges), 16)
 })
 
 test_that("Exception is thrown for 400+ proteins in dataframe", {
