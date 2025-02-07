@@ -15,13 +15,14 @@ Description: A set of tools for network analysis using mass
     integrates with INDRA, which is a database of biological networks
     extracted from the literature using text mining techniques.
 License: file LICENSE
-Depends: R (>= 4.4.0)
+Depends: 
+    R (>= 4.4.0), 
+    MSstats
 Imports: 
     RCy3,
     httr,
     jsonlite,
     r2r,
-    MSstats,
     tidyr
 Suggests: 
     data.table,
